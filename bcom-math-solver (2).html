@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BCom গণিত সহায়ক</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0f1117;
+      --surface:   #1a1d27;
+      --card:      #20243a;
+      --border:    #2e3350;
+      --accent:    #4f8ef7;
+      --accent2:   #a78bfa;
+      --green:     #34d399;
+      --text:      #e2e8f0;
+      --muted:     #8892a4;
+      --danger:    #f87171;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Hind Siliguri', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      background: rgba(79,142,247,0.15);
+      color: var(--accent);
+      border: 1px solid rgba(79,142,247,0.3);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 56px 24px 40px;
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(79,142,247,0.12), transparent);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #fff 40%, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    /* ── TOPIC CHIPS ── */
+    .topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 0 24px 40px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .chip {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .chip:hover, .chip.active {
+      background: rgba(79,142,247,0.12);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      flex: 1;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    /* ── API KEY SETUP ── */
+    #setup-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    #setup-card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #setup-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .key-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .key-row input {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .key-row input:focus { border-color: var(--accent); }
+    .key-row input::placeholder { color: var(--muted); }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-family: 'Hind Siliguri', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: #3a7ae0; transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-ghost {
+      background: var(--card);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+
+    .key-status {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      display: none;
+    }
+
+    .key-status.ok { color: var(--green); display: block; }
+    .key-status.err { color: var(--danger); display: block; }
+
+    /* ── SOLVER CARD ── */
+    #solver-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .solver-header {
+      padding: 20px 24px 0;
+    }
+
+    .solver-header h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .solver-header p {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .textarea-wrap {
+      position: relative;
+      padding: 16px 24px;
+    }
+
+    textarea {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-family: 'Hind Siliguri', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      resize: none;
+      outline: none;
+      min-height: 120px;
+      transition: border-color 0.2s;
+    }
+
+    textarea:focus { border-color: var(--accent); }
+    textarea::placeholder { color: var(--muted); }
+
+    .solver-footer {
+      padding: 0 24px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .example-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .example-btn {
+      font-size: 0.75rem;
+      padding: 5px 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: 'Hind Siliguri', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .example-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+    .solve-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Hind Siliguri', sans-serif;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .solve-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .solve-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* ── ANSWER BOX ── */
+    #answer-section { display: none; }
+
+    .answer-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .answer-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .answer-header span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .answer-body {
+      padding: 24px;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      white-space: pre-wrap;
+      color: var(--text);
+    }
+
+    .answer-body strong { color: var(--accent); }
+
+    /* loading dots */
+    .loading {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ── HISTORY ── */
+    #history-section { margin-top: 32px; display: none; }
+
+    #history-section h3 {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .history-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .history-item:hover { border-color: var(--accent); }
+
+    .history-q {
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .history-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── IMAGE UPLOAD ── */
+    .upload-area {
+      margin: 0 24px 16px;
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .upload-area:hover {
+      border-color: var(--accent);
+      background: rgba(79,142,247,0.05);
+    }
+
+    .upload-icon { font-size: 2rem; margin-bottom: 8px; }
+
+    .upload-text {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .upload-text span { color: var(--accent); font-weight: 600; }
+
+    #img-input { display: none; }
+
+    .upload-btn {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+
+    .image-preview-wrap {
+      margin: 0 24px 16px;
+      display: none;
+      position: relative;
+    }
+
+    .image-preview-wrap img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    .remove-img {
+      position: absolute;
+      top: 8px; right: 8px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 28px; height: 28px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .img-note {
+      margin: 0 24px 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: none;
+    }
+
+    .tab-row {
+      display: flex;
+      padding: 16px 24px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+
+    .tab {
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--muted);
+      font-family: 'Hind Siliguri', sans-serif;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      margin-bottom: -1px;
+    }
+
+    .tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .solver-footer { flex-direction: column; align-items: stretch; }
+      .solve-btn { justify-content: center; }
+      .key-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-icon">📐</div>
+    BCom গণিত সহায়ক
+  </a>
+  <span class="badge">Powered by Gemini AI</span>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">✦ সম্পূর্ণ বিনামূল্যে</div>
+  <h1>BCom-এর যেকোনো অংক<br/>এখানেই সমাধান করো</h1>
+  <p>Accounting, Statistics, Finance, Partnership — সব ধরনের অংক step-by-step সমাধান পাও।</p>
+</div>
+
+<!-- TOPIC CHIPS -->
+<div class="topics">
+  <span class="chip active" onclick="setTopic(this, '')">সব বিষয়</span>
+  <span class="chip" onclick="setTopic(this, 'Accounting')">Accounting</span>
+  <span class="chip" onclick="setTopic(this, 'Statistics')">Statistics</span>
+  <span class="chip" onclick="setTopic(this, 'Mathematics of Finance')">Mathematics of Finance</span>
+  <span class="chip" onclick="setTopic(this, 'Partnership Accounts')">Partnership Accounts</span>
+  <span class="chip" onclick="setTopic(this, 'Company Accounts')">Company Accounts</span>
+  <span class="chip" onclick="setTopic(this, 'Cost Accounting')">Cost Accounting</span>
+  <span class="chip" onclick="setTopic(this, 'Income Tax')">Income Tax</span>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- API KEY SETUP -->
+  <div id="setup-card">
+    <h2>🔑 Gemini API Key সেট করো</h2>
+    <p>
+      <a href="https://aistudio.google.com" target="_blank" style="color:var(--accent)">aistudio.google.com</a> থেকে ফ্রি API key নিয়ে নিচে বসাও।
+      এই key শুধু তোমার browser-এ থাকবে, কোথাও পাঠানো হবে না।
+    </p>
+    <div class="key-row">
+      <input type="password" id="api-key-input" placeholder="AIza..." />
+      <button class="btn btn-primary" onclick="saveKey()">সেভ করো</button>
+    </div>
+    <div id="key-status" class="key-status"></div>
+  </div>
+
+  <!-- SOLVER -->
+  <div id="solver-card">
+    <div class="solver-header">
+      <h2>অংকটি দাও</h2>
+      <p>টাইপ করো অথবা প্রশ্নের ছবি তুলে আপলোড করো।</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="tab-row">
+      <button class="tab active" onclick="switchTab('text')">✏️ টাইপ করো</button>
+      <button class="tab" onclick="switchTab('image')">📷 ছবি আপলোড</button>
+    </div>
+
+    <!-- TEXT TAB -->
+    <div id="tab-text">
+      <div class="textarea-wrap">
+        <textarea id="problem-input" rows="5"
+          placeholder="উদাহরণ: একটি দোকানে পণ্যের ক্রয়মূল্য ৫০০০ টাকা। বিক্রয়মূল্যের উপর ২০% লাভ হলে বিক্রয়মূল্য কত?"></textarea>
+      </div>
+    </div>
+
+    <!-- IMAGE TAB -->
+    <div id="tab-image" style="display:none; padding-top:16px;">
+      <div style="padding: 0 24px 16px; display:flex; gap:10px; flex-wrap:wrap;">
+        <label for="img-input" style="
+          display:inline-flex; align-items:center; gap:8px;
+          padding:12px 22px; background:var(--accent); color:#fff;
+          border-radius:10px; font-size:0.95rem; font-weight:600;
+          cursor:pointer; font-family:Hind Siliguri,sans-serif;">
+          📷 ক্যামেরা / গ্যালারি
+        </label>
+        <input type="file" id="img-input" accept="image/*" onchange="handleImage(event)"
+          style="display:none;" />
+      </div>
+      <div id="upload-area" style="
+        margin:0 24px 16px; border:2px dashed var(--border);
+        border-radius:12px; padding:20px; text-align:center; color:var(--muted); font-size:0.85rem;">
+        ছবি বেছে নেওয়ার পর এখানে দেখাবে
+      </div>
+      <div class="image-preview-wrap" id="img-preview-wrap">
+        <img id="img-preview" src="" alt="প্রশ্নের ছবি" />
+        <button class="remove-img" onclick="removeImage()">✕</button>
+      </div>
+      <div class="img-note" id="img-note">
+        💡 ছবিতে একাধিক প্রশ্ন থাকলে নিচে question number বলে দাও।
+      </div>
+      <div class="textarea-wrap" style="padding-top:0;">
+        <textarea id="img-extra" rows="2"
+          placeholder="ঐচ্ছিক: কোন প্রশ্ন নম্বর সমাধান করতে চাও? (যেমন: Q.3, Q.5b)"></textarea>
+      </div>
+    </div>
+
+    <div class="solver-footer">
+      <div class="example-btns">
+        <button class="example-btn" onclick="fillExample(0)">Simple Interest</button>
+        <button class="example-btn" onclick="fillExample(1)">Depreciation</button>
+        <button class="example-btn" onclick="fillExample(2)">Mean & Median</button>
+        <button class="example-btn" onclick="fillExample(3)">Journal Entry</button>
+        <button class="example-btn" onclick="fillExample(4)">Partnership</button>
+      </div>
+      <button class="solve-btn" id="solve-btn" onclick="solveProblem()">
+        <span>সমাধান করো</span>
+        <span>→</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ANSWER -->
+  <div id="answer-section">
+    <div class="answer-card">
+      <div class="answer-header">
+        <span>✦ সমাধান</span>
+        <button class="btn btn-ghost" onclick="copyAnswer()" style="font-size:0.78rem;padding:6px 12px;">কপি করো</button>
+      </div>
+      <div id="answer-body" class="answer-body"></div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div id="history-section">
+    <h3>আগের অংকগুলো</h3>
+    <div id="history-list"></div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  BCom গণিত সহায়ক — West Bengal-এর সব BCom students-দের জন্য সম্পূর্ণ বিনামূল্যে।<br/>
+  AI ভুলও করতে পারে — গুরুত্বপূর্ণ উত্তর একবার যাচাই করে নিও।
+</footer>
+
+<script>
+  // ── STATE ──
+  let apiKey = localStorage.getItem('gemini_key') || '';
+  let selectedTopic = '';
+  let history = JSON.parse(localStorage.getItem('math_history') || '[]');
+  let uploadedImageBase64 = null;
+  let uploadedImageMime = null;
+  let activeTab = 'text';
+
+  // ── TAB SWITCH ──
+  function switchTab(tab) {
+    activeTab = tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('tab-text').style.display = tab === 'text' ? 'block' : 'none';
+    document.getElementById('tab-image').style.display = tab === 'image' ? 'block' : 'none';
+  }
+
+  // ── IMAGE HANDLING ──
+  function handleImage(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const result = ev.target.result;
+      uploadedImageMime = file.type;
+      uploadedImageBase64 = result.split(',')[1];
+      document.getElementById('img-preview').src = result;
+      document.getElementById('img-preview-wrap').style.display = 'block';
+      document.getElementById('img-note').style.display = 'block';
+      document.getElementById('upload-area').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function removeImage() {
+    uploadedImageBase64 = null;
+    uploadedImageMime = null;
+    document.getElementById('img-preview-wrap').style.display = 'none';
+    document.getElementById('img-note').style.display = 'none';
+    document.getElementById('upload-area').style.display = 'block';
+    document.getElementById('img-input').value = '';
+    document.getElementById('img-extra').value = '';
+  }
+
+  const EXAMPLES = [
+    'মূলধন ৮০০০ টাকা, সুদের হার বার্ষিক ৬%, সময় ৩ বছর। সরল সুদ ও মিশ্র পরিমাণ বের করো।',
+    'একটি যন্ত্রের ক্রয়মূল্য ৫০,০০০ টাকা। বার্ষিক অবচয়ের হার ১০%। ৩ বছর পর এর বইমূল্য Straight Line Method-এ বের করো।',
+    'নিচের তথ্য থেকে Mean, Median ও Mode বের করো: ১২, ১৫, ১৮, ২০, ২২, ২৫, ২৫, ৩০।',
+    'রাহুল ব্যবসা শুরু করলেন। নগদে আসবাব কিনলেন ১৫,০০০ টাকা। Journal Entry করো।',
+    'A ও B সমান অংশে অংশীদার। বার্ষিক লাভ ৬০,০০০ টাকা। A-এর বেতন ১২,০০০ টাকা। লাভ বণ্টন করো।'
+  ];
+
+  // ── INIT ──
+  if (apiKey) {
+    document.getElementById('api-key-input').value = apiKey;
+    document.getElementById('key-status').className = 'key-status ok';
+    document.getElementById('key-status').textContent = '✓ API Key সেট আছে';
+  }
+
+  renderHistory();
+
+  // ── FUNCTIONS ──
+  function saveKey() {
+    const val = document.getElementById('api-key-input').value.trim();
+    const st = document.getElementById('key-status');
+    if (val.length < 20) {
+      st.className = 'key-status err';
+      st.textContent = '✗ সঠিক API Key দাও';
+      return;
+    }
+    apiKey = val;
+    localStorage.setItem('gemini_key', apiKey);
+    st.className = 'key-status ok';
+    st.textContent = '✓ API Key সেভ হয়েছে!';
+  }
+
+  function setTopic(el, topic) {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    selectedTopic = topic;
+  }
+
+  function fillExample(i) {
+    document.getElementById('problem-input').value = EXAMPLES[i];
+    document.getElementById('problem-input').focus();
+  }
+
+  async function solveProblem() {
+    if (!apiKey) {
+      alert('আগে API Key সেভ করো!');
+      return;
+    }
+
+    const isImage = activeTab === 'image';
+
+    if (isImage && !uploadedImageBase64) {
+      alert('আগে প্রশ্নের ছবি আপলোড করো!');
+      return;
+    }
+
+    const textProblem = document.getElementById('problem-input').value.trim();
+    if (!isImage && !textProblem) {
+      alert('অংকটি লেখো আগে।');
+      return;
+    }
+
+    const btn = document.getElementById('solve-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span>সমাধান হচ্ছে...</span>';
+
+    const ansSection = document.getElementById('answer-section');
+    const ansBody = document.getElementById('answer-body');
+
+    ansSection.style.display = 'block';
+    ansBody.innerHTML = `<div class="loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Gemini ভাবছে...</span></div>`;
+
+    ansSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const topicLine = selectedTopic ? `বিষয়: ${selectedTopic}\n\n` : '';
+    const systemPrompt = `তুমি একজন BCom (Bachelor of Commerce) গণিতের বিশেষজ্ঞ শিক্ষক। West Bengal-এর BCom Honours ও Pass কোর্সের স্টুডেন্টদের সাহায্য করো।
+
+কঠোর নিয়ম — অবশ্যই মানতে হবে:
+১. শুধু প্রশ্ন পড়ে বা repeat করে থেমে যাবে না — সম্পূর্ণ numerical calculation করে আসল উত্তর বের করতে হবে।
+২. প্রতিটি ধাপে real সংখ্যা বসিয়ে হিসাব দেখাতে হবে, শুধু পদ্ধতি বললে চলবে না।
+৩. ছবিতে table বা একাধিক তথ্য থাকলে, প্রতিটা সংখ্যা ব্যবহার করে সম্পূর্ণ গণনা শেষ করতে হবে।
+৪. শেষে অবশ্যই একটা চূড়ান্ত সাংখ্যিক উত্তর (final answer) দিতে হবে।
+৫. "গণনা করুন" বা এই জাতীয় কোনো instruction-sentence লিখে থেমে যাওয়া যাবে না — নিজেই calculation সম্পূর্ণ করতে হবে।
+
+সমাধানের ফরম্যাট:
+✦ প্রদত্ত তথ্য (সব সংখ্যা পরিষ্কারভাবে)
+✦ সূত্র (যদি থাকে)
+✦ ধাপে ধাপে সম্পূর্ণ গণনা (প্রতিটি ধাপে real number বসিয়ে)
+✦ চূড়ান্ত উত্তর (bold করে স্পষ্টভাবে)`;
+
+    let parts = [];
+
+    if (isImage) {
+      const extraNote = document.getElementById('img-extra').value.trim();
+      const imgPrompt = `${systemPrompt}\n\n${topicLine}ছবিতে যে BCom-এর অংক আছে সেটা সমাধান করো।${extraNote ? '\n\nশুধু এই প্রশ্নটি সমাধান করো: ' + extraNote : ' সব প্রশ্ন সমাধান করো।'}`;
+      parts = [
+        { inline_data: { mime_type: uploadedImageMime, data: uploadedImageBase64 } },
+        { text: imgPrompt }
+      ];
+    } else {
+      const prompt = `${systemPrompt}\n\n${topicLine}অংক:\n${textProblem}`;
+      parts = [{ text: prompt }];
+    }
+
+    const maxRetries = 3;
+    let lastError = '';
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        if (attempt > 1) {
+          ansBody.innerHTML = `<div class="loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>সার্ভার ব্যস্ত আছে, আবার চেষ্টা হচ্ছে (${attempt}/${maxRetries})...</span></div>`;
+          await new Promise(r => setTimeout(r, 2000));
+        }
+
+        const res = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts }],
+              generationConfig: { temperature: 0.2, maxOutputTokens: 8192 }
+            })
+          }
+        );
+
+        const data = await res.json();
+
+        if (data.error) {
+          lastError = data.error.message || '';
+          const isBusy = /high demand|overloaded|503|UNAVAILABLE/i.test(lastError);
+          if (isBusy && attempt < maxRetries) {
+            continue; // retry
+          }
+          ansBody.innerHTML = `<span style="color:var(--danger)">❌ ত্রুটি: ${lastError}</span>`;
+          btn.disabled = false;
+          btn.innerHTML = '<span>সমাধান করো</span><span>→</span>';
+          return;
+        }
+
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'উত্তর পাওয়া যায়নি।';
+        ansBody.textContent = text;
+
+        const histQ = isImage ? '[ছবি থেকে অংক]' : textProblem;
+        history.unshift({ q: histQ, time: new Date().toLocaleString('bn-IN') });
+        if (history.length > 10) history.pop();
+        localStorage.setItem('math_history', JSON.stringify(history));
+        renderHistory();
+        break; // success, exit retry loop
+
+      } catch (e) {
+        lastError = 'সংযোগে সমস্যা';
+        if (attempt === maxRetries) {
+          ansBody.innerHTML = `<span style="color:var(--danger)">❌ সংযোগে সমস্যা হয়েছে। Internet connection চেক করো।</span>`;
+        }
+      }
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '<span>সমাধান করো</span><span>→</span>';
+  }
+
+  function copyAnswer() {
+    const text = document.getElementById('answer-body').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('সমাধান কপি হয়েছে!');
+    });
+  }
+
+  function renderHistory() {
+    if (history.length === 0) return;
+    const sec = document.getElementById('history-section');
+    const list = document.getElementById('history-list');
+    sec.style.display = 'block';
+    list.innerHTML = history.map((h, i) => `
+      <div class="history-item" onclick="loadHistory(${i})">
+        <div class="history-q">${h.q}</div>
+        <div class="history-meta">${h.time}</div>
+      </div>
+    `).join('');
+  }
+
+  function loadHistory(i) {
+    document.getElementById('problem-input').value = history[i].q;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
