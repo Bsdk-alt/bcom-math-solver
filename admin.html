@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — BCom Math Solver</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --card: #20243a;
+      --border: #2e3350;
+      --accent: #4f8ef7;
+      --accent2: #a78bfa;
+      --green: #34d399;
+      --red: #f87171;
+      --yellow: #fbbf24;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN SCREEN ── */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .login-box h1 {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .login-box p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+    }
+
+    input {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    input:focus { border-color: var(--accent); }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    button:hover { background: #3a7ae0; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .error-msg {
+      color: var(--red);
+      font-size: 0.82rem;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* ── DASHBOARD ── */
+    #dashboard { display: none; }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 { font-size: 1.1rem; }
+
+    .logout-btn {
+      width: auto;
+      padding: 8px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .stat-card .label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .stat-card .value {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .stat-card .value.green { color: var(--green); }
+    .stat-card .value.accent { color: var(--accent); }
+
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    section h2 {
+      font-size: 1rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .add-key-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .add-key-row input { margin-bottom: 0; flex: 1; min-width: 140px; }
+    .add-key-row button { width: auto; padding: 12px 20px; white-space: nowrap; }
+
+    .key-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .key-info { flex: 1; min-width: 200px; }
+
+    .key-label {
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+
+    .key-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .key-usage-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--bg);
+      border-radius: 3px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .key-usage-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 3px;
+      transition: width 0.3s;
+    }
+
+    .key-usage-fill.warn { background: var(--yellow); }
+    .key-usage-fill.full { background: var(--red); }
+
+    .key-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: auto;
+      padding: 7px 12px;
+      font-size: 0.78rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .icon-btn.danger { color: var(--red); }
+    .icon-btn.toggle-on { color: var(--green); }
+    .icon-btn.toggle-off { color: var(--muted); }
+
+    .empty-state {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 30px 0;
+    }
+
+    .log-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.82rem;
+    }
+
+    .log-item:last-child { border-bottom: none; }
+    .log-item .log-source { color: var(--muted); }
+    .log-item .log-source.admin { color: var(--accent); }
+    .log-item .log-source.own { color: var(--green); }
+    .log-item .log-time { color: var(--muted); font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>🔐 Admin Panel</h1>
+    <p>BCom গণিত সহায়ক — শুধু admin-দের জন্য</p>
+    <input type="email" id="admin-email" placeholder="Admin email" />
+    <input type="password" id="admin-password" placeholder="Password" />
+    <button onclick="login()" id="login-btn">Login</button>
+    <div class="error-msg" id="login-error"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header>
+    <h1>📊 Admin Dashboard</h1>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </header>
+
+  <main>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="label">Total Requests Today</div>
+        <div class="value accent" id="stat-today">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Active Keys</div>
+        <div class="value green" id="stat-active-keys">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Total Quota Left</div>
+        <div class="value" id="stat-quota-left">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Lifetime Requests</div>
+        <div class="value" id="stat-lifetime">—</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>🔑 Gemini API Keys</h2>
+      <div class="add-key-row">
+        <input type="text" id="new-key-label" placeholder="Label (e.g. Account 4)" />
+        <input type="text" id="new-key-value" placeholder="API Key (AIza... or AQ...)" />
+        <button onclick="addKey()" style="background:var(--green);">+ Add Key</button>
+      </div>
+      <div id="keys-list"></div>
+    </section>
+
+    <section>
+      <h2>📋 Recent Activity</h2>
+      <div id="logs-list"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+  // ── SUPABASE CONFIG — এই দুটো জায়গায় তোমার নিজের value বসাও ──
+  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // ── SIMPLE ADMIN AUTH (env-based, not full Supabase Auth for simplicity) ──
+  // এটা একটা সহজ password check — production-grade না, কিন্তু ছোট scale-এর জন্য যথেষ্ট
+  const ADMIN_EMAIL = 'YOUR_ADMIN_EMAIL';
+  const ADMIN_PASSWORD = 'YOUR_ADMIN_PASSWORD'; // এখানে নিজের পছন্দমতো password বসাও
+
+  function login() {
+    const email = document.getElementById('admin-email').value.trim();
+    const pass = document.getElementById('admin-password').value;
+    const errBox = document.getElementById('login-error');
+
+    if (email === ADMIN_EMAIL && pass === ADMIN_PASSWORD) {
+      sessionStorage.setItem('admin_logged_in', 'true');
+      showDashboard();
+    } else {
+      errBox.textContent = '❌ ভুল email বা password';
+      errBox.style.display = 'block';
+    }
+  }
+
+  function logout() {
+    sessionStorage.removeItem('admin_logged_in');
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+  }
+
+  function showDashboard() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadKeys();
+    loadLogs();
+  }
+
+  // page load এ check করা already logged in কিনা
+  if (sessionStorage.getItem('admin_logged_in') === 'true') {
+    showDashboard();
+  }
+
+  // ── LOAD KEYS ──
+  async function loadKeys() {
+    const { data: keys, error } = await supabaseClient
+      .from('admin_gemini_keys')
+      .select('*')
+      .order('created_at', { ascending: true });
+
+    const listEl = document.getElementById('keys-list');
+
+    if (error) {
+      listEl.innerHTML = `<div class="empty-state">Error loading keys: ${error.message}</div>`;
+      return;
+    }
+
+    if (!keys || keys.length === 0) {
+      listEl.innerHTML = `<div class="empty-state">এখনো কোনো key যোগ করা হয়নি। উপরে থেকে একটা key যোগ করো।</div>`;
+      updateStats(keys || []);
+      return;
+    }
+
+    listEl.innerHTML = keys.map(k => {
+      const pct = Math.round((k.daily_used / k.daily_limit) * 100);
+      const barClass = pct >= 90 ? 'full' : pct >= 60 ? 'warn' : '';
+      const maskedKey = k.api_key.slice(0, 6) + '••••••••' + k.api_key.slice(-4);
+
+      return `
+        <div class="key-item">
+          <div class="key-info">
+            <div class="key-label">${k.key_label} ${k.is_active ? '' : '<span style="color:var(--red);font-size:0.75rem;">(বন্ধ)</span>'}</div>
+            <div class="key-meta">${maskedKey} · ${k.daily_used}/${k.daily_limit} আজকে · মোট ${k.total_requests || 0}</div>
+            <div class="key-usage-bar"><div class="key-usage-fill ${barClass}" style="width:${pct}%"></div></div>
+          </div>
+          <div class="key-actions">
+            <button class="icon-btn ${k.is_active ? 'toggle-on' : 'toggle-off'}" onclick="toggleKey('${k.id}', ${!k.is_active})">
+              ${k.is_active ? '✓ চালু' : '✕ বন্ধ'}
+            </button>
+            <button class="icon-btn danger" onclick="deleteKey('${k.id}')">🗑️ মুছো</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    updateStats(keys);
+  }
+
+  function updateStats(keys) {
+    const activeKeys = keys.filter(k => k.is_active);
+    const totalUsedToday = keys.reduce((sum, k) => sum + (k.daily_used || 0), 0);
+    const totalQuota = activeKeys.reduce((sum, k) => sum + (k.daily_limit || 0), 0);
+    const quotaLeft = totalQuota - activeKeys.reduce((sum, k) => sum + (k.daily_used || 0), 0);
+    const lifetime = keys.reduce((sum, k) => sum + (k.total_requests || 0), 0);
+
+    document.getElementById('stat-today').textContent = totalUsedToday;
+    document.getElementById('stat-active-keys').textContent = activeKeys.length;
+    document.getElementById('stat-quota-left').textContent = quotaLeft;
+    document.getElementById('stat-lifetime').textContent = lifetime;
+  }
+
+  // ── ADD KEY ──
+  async function addKey() {
+    const label = document.getElementById('new-key-label').value.trim();
+    const keyVal = document.getElementById('new-key-value').value.trim();
+
+    if (!label || !keyVal) {
+      alert('Label আর API key দুটোই দাও।');
+      return;
+    }
+
+    const { error } = await supabaseClient
+      .from('admin_gemini_keys')
+      .insert({ key_label: label, api_key: keyVal });
+
+    if (error) {
+      alert('Error: ' + error.message);
+      return;
+    }
+
+    document.getElementById('new-key-label').value = '';
+    document.getElementById('new-key-value').value = '';
+    loadKeys();
+  }
+
+  // ── TOGGLE KEY ON/OFF ──
+  async function toggleKey(id, newState) {
+    await supabaseClient
+      .from('admin_gemini_keys')
+      .update({ is_active: newState })
+      .eq('id', id);
+    loadKeys();
+  }
+
+  // ── DELETE KEY ──
+  async function deleteKey(id) {
+    if (!confirm('এই key টা মুছে দিতে চাও? এটা ফিরিয়ে আনা যাবে না।')) return;
+    await supabaseClient
+      .from('admin_gemini_keys')
+      .delete()
+      .eq('id', id);
+    loadKeys();
+  }
+
+  // ── LOAD RECENT LOGS ──
+  async function loadLogs() {
+    const { data: logs, error } = await supabaseClient
+      .from('usage_logs')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(20);
+
+    const listEl = document.getElementById('logs-list');
+
+    if (error || !logs || logs.length === 0) {
+      listEl.innerHTML = `<div class="empty-state">এখনো কোনো activity নেই।</div>`;
+      return;
+    }
+
+    listEl.innerHTML = logs.map(l => {
+      const sourceClass = l.used_admin_key ? 'admin' : 'own';
+      const sourceText = l.used_admin_key ? 'Admin Key' : 'Own Key';
+      const statusIcon = l.success ? '✅' : '❌';
+      const time = new Date(l.created_at).toLocaleString('bn-IN');
+
+      return `
+        <div class="log-item">
+          <div>
+            ${statusIcon} ${l.is_image ? '📷' : '✏️'} <span class="log-source ${sourceClass}">${sourceText}</span>
+            ${l.topic ? ' · ' + l.topic : ''}
+          </div>
+          <div class="log-time">${time}</div>
+        </div>
+      `;
+    }).join('');
+  }
+</script>
+</body>
+</html>
