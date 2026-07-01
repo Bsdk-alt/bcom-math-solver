@@ -3,29 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BCom Math Helper</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <title>BCom Math Helper — Step-by-Step Solutions</title>
+  <meta name="description" content="Free step-by-step solutions for BCom Accounting, Statistics, Finance and Partnership problems. For BCom Honours and Pass students of West Bengal." />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0f1117;
-      --surface:   #1a1d27;
-      --card:      #20243a;
-      --border:    #2e3350;
-      --accent:    #4f8ef7;
-      --accent2:   #a78bfa;
-      --green:     #34d399;
-      --text:      #e2e8f0;
-      --muted:     #8892a4;
-      --danger:    #f87171;
+      --bg:        #0e1117;
+      --surface:   #161b27;
+      --card:      #1c2235;
+      --border:    #262f47;
+      --accent:    #4e7cff;
+      --gold:      #c9a84c;
+      --green:     #3ec98e;
+      --text:      #dde3f0;
+      --muted:     #7c8aa0;
+      --danger:    #e05a5a;
+      --serif:     'Lora', Georgia, serif;
+      --sans:      'Inter', system-ui, sans-serif;
+      --mono:      'JetBrains Mono', monospace;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'Inter', 'Hind Siliguri', sans-serif;
+      font-family: var(--sans);
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -33,58 +36,47 @@
       flex-direction: column;
     }
 
-    body.lang-bn { font-family: 'Hind Siliguri', sans-serif; }
-
     /* ── HEADER ── */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      height: 60px;
+      padding: 0 28px;
+      height: 58px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: sticky;
       top: 0;
       z-index: 100;
-      gap: 12px;
+      gap: 14px;
     }
 
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text);
       text-decoration: none;
-      white-space: nowrap;
     }
 
-    .logo-icon {
-      width: 32px; height: 32px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 8px;
+    .logo-mark {
+      width: 34px; height: 34px;
+      background: var(--gold);
+      border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
+      font-size: 17px;
       flex-shrink: 0;
     }
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .logo-text {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.01em;
     }
 
-    .badge {
-      font-size: 0.7rem;
-      background: rgba(79,142,247,0.15);
-      color: var(--accent);
-      border: 1px solid rgba(79,142,247,0.3);
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-weight: 500;
-      white-space: nowrap;
+    .logo-text span {
+      color: var(--gold);
     }
 
     select#lang-select {
@@ -92,348 +84,271 @@
       border: 1px solid var(--border);
       color: var(--text);
       padding: 6px 10px;
-      border-radius: 8px;
+      border-radius: 7px;
       font-size: 0.78rem;
       cursor: pointer;
       outline: none;
-      font-family: inherit;
+      font-family: var(--sans);
     }
 
     /* ── HERO ── */
     .hero {
       text-align: center;
-      padding: 48px 24px 36px;
-      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(79,142,247,0.12), transparent);
+      padding: 52px 24px 40px;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(78,124,255,0.1), transparent);
+      border-bottom: 1px solid var(--border);
     }
 
-    .hero-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      color: var(--green);
-      letter-spacing: 0.1em;
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 16px;
+      color: var(--gold);
+      margin-bottom: 18px;
     }
 
     .hero h1 {
-      font-size: clamp(1.7rem, 5vw, 2.6rem);
-      font-weight: 700;
-      line-height: 1.25;
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 600;
+      line-height: 1.22;
+      color: var(--text);
       margin-bottom: 14px;
-      background: linear-gradient(135deg, #fff 40%, var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
     }
 
     .hero p {
       color: var(--muted);
-      font-size: 0.95rem;
-      max-width: 480px;
+      font-size: 0.96rem;
+      max-width: 440px;
       margin: 0 auto;
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     /* ── TOPIC CHIPS ── */
+    .topics-wrap {
+      padding: 24px 20px 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .topics-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-family: var(--mono);
+    }
+
     .topics {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      padding: 28px 24px 0;
-      max-width: 700px;
-      margin: 0 auto;
+      gap: 7px;
     }
 
     .chip {
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
+      padding: 5px 13px;
+      border-radius: 5px;
+      font-size: 0.78rem;
       font-weight: 500;
       cursor: pointer;
       border: 1px solid var(--border);
-      background: var(--surface);
+      background: var(--card);
       color: var(--muted);
-      transition: all 0.2s;
+      transition: all 0.15s;
       user-select: none;
+      font-family: var(--sans);
     }
 
-    .chip:hover, .chip.active {
-      background: rgba(79,142,247,0.12);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
+    .chip:hover { color: var(--text); border-color: var(--muted); }
+    .chip.active { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold); }
 
-    /* ── MAIN LAYOUT ── */
+    /* ── MAIN ── */
     main {
       flex: 1;
-      max-width: 860px;
+      max-width: 820px;
       width: 100%;
       margin: 0 auto;
-      padding: 28px 16px 60px;
+      padding: 28px 16px 64px;
     }
 
-    /* ── OWN KEY SETUP (COLLAPSIBLE) ── */
+    /* ── OWN KEY (collapsible) ── */
     #setup-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      margin-bottom: 20px;
+      border-radius: 10px;
+      margin-bottom: 18px;
       overflow: hidden;
     }
 
     .setup-toggle {
-      padding: 16px 24px;
+      padding: 14px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
       user-select: none;
+      gap: 12px;
     }
 
-    .setup-toggle-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .setup-left { display: flex; align-items: center; gap: 12px; }
 
-    .setup-toggle h2 {
-      font-size: 0.92rem;
+    .using-badge {
+      font-size: 0.7rem;
+      padding: 3px 9px;
+      border-radius: 4px;
       font-weight: 600;
+      white-space: nowrap;
+      font-family: var(--mono);
     }
 
-    .setup-toggle .sub {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
+    .using-badge.shared { background: rgba(78,124,255,0.12); color: var(--accent); border: 1px solid rgba(78,124,255,0.25); }
+    .using-badge.own { background: rgba(62,201,142,0.12); color: var(--green); border: 1px solid rgba(62,201,142,0.25); }
 
-    .chevron {
-      transition: transform 0.2s;
-      color: var(--muted);
-    }
-
+    .setup-title { font-size: 0.88rem; font-weight: 600; }
+    .setup-sub { font-size: 0.75rem; color: var(--muted); margin-top: 1px; }
+    .chevron { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
     .chevron.open { transform: rotate(180deg); }
 
-    #setup-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
+    #setup-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    #setup-body.open { max-height: 250px; }
 
-    #setup-body.open { max-height: 300px; }
+    .setup-inner { padding: 0 20px 18px; }
+    .setup-inner p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
 
-    #setup-body-inner {
-      padding: 0 24px 20px;
-    }
-
-    #setup-body-inner p {
-      font-size: 0.83rem;
-      color: var(--muted);
-      margin-bottom: 14px;
-      line-height: 1.6;
-    }
-
-    .key-row {
-      display: flex;
-      gap: 10px;
-    }
-
+    .key-row { display: flex; gap: 8px; }
     .key-row input {
       flex: 1;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 14px;
+      border-radius: 7px;
+      padding: 9px 12px;
       color: var(--text);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
       outline: none;
-      transition: border-color 0.2s;
     }
-
     .key-row input:focus { border-color: var(--accent); }
     .key-row input::placeholder { color: var(--muted); }
 
-    .btn {
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      font-family: inherit;
-      transition: all 0.2s;
-    }
-
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: #3a7ae0; transform: translateY(-1px); }
-    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-    .btn-ghost {
-      background: var(--card);
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
-
-    .key-status {
-      margin-top: 10px;
-      font-size: 0.8rem;
-      display: none;
-    }
-
+    .key-status { margin-top: 8px; font-size: 0.78rem; display: none; }
     .key-status.ok { color: var(--green); display: block; }
     .key-status.err { color: var(--danger); display: block; }
-
-    .using-indicator {
-      font-size: 0.72rem;
-      padding: 3px 9px;
-      border-radius: 12px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .using-indicator.own { background: rgba(52,211,153,0.15); color: var(--green); }
-    .using-indicator.shared { background: rgba(167,139,250,0.15); color: var(--accent2); }
 
     /* ── SOLVER CARD ── */
     #solver-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
-    .solver-header {
-      padding: 20px 24px 0;
-    }
-
-    .solver-header h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .solver-header p {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
+    .solver-header { padding: 20px 22px 0; }
+    .solver-header h2 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 3px; }
+    .solver-header p { font-size: 0.8rem; color: var(--muted); }
 
     .tab-row {
       display: flex;
-      padding: 16px 24px 0;
+      padding: 14px 22px 0;
       border-bottom: 1px solid var(--border);
+      gap: 4px;
     }
 
     .tab {
-      padding: 8px 18px;
-      font-size: 0.85rem;
+      padding: 7px 16px;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       border: none;
       background: none;
       color: var(--muted);
-      font-family: inherit;
+      font-family: var(--sans);
       border-bottom: 2px solid transparent;
-      transition: all 0.2s;
+      transition: all 0.15s;
       margin-bottom: -1px;
     }
+    .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
 
-    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-    .textarea-wrap { padding: 16px 24px; }
+    .textarea-wrap { padding: 16px 22px; }
 
     textarea {
       width: 100%;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
+      border-radius: 8px;
+      padding: 13px 15px;
       color: var(--text);
-      font-family: inherit;
-      font-size: 0.95rem;
+      font-family: var(--sans);
+      font-size: 0.93rem;
       line-height: 1.7;
       resize: none;
       outline: none;
-      min-height: 120px;
-      transition: border-color 0.2s;
+      min-height: 110px;
+      transition: border-color 0.15s;
     }
-
     textarea:focus { border-color: var(--accent); }
     textarea::placeholder { color: var(--muted); }
 
-    .upload-btn-wrap {
-      padding: 0 24px 16px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .upload-wrap { padding: 0 22px 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 
     .upload-label {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 22px;
+      padding: 10px 20px;
       background: var(--accent);
       color: #fff;
-      border-radius: 10px;
-      font-size: 0.95rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
       font-weight: 600;
       cursor: pointer;
+      font-family: var(--sans);
+      transition: background 0.15s;
     }
-
+    .upload-label:hover { background: #3a68e0; }
     #img-input { display: none; }
 
-    #upload-area {
-      margin: 0 24px 16px;
-      border: 2px dashed var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
+    #upload-placeholder {
+      font-size: 0.8rem;
       color: var(--muted);
-      font-size: 0.85rem;
+      padding: 12px 16px;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      flex: 1;
+      text-align: center;
     }
 
-    .image-preview-wrap {
-      margin: 0 24px 16px;
-      display: none;
-      position: relative;
-    }
-
+    .image-preview-wrap { margin: 0 22px 16px; display: none; position: relative; }
     .image-preview-wrap img {
       width: 100%;
-      max-height: 300px;
+      max-height: 280px;
       object-fit: contain;
-      border-radius: 10px;
+      border-radius: 8px;
       border: 1px solid var(--border);
       background: var(--card);
     }
-
     .remove-img {
-      position: absolute;
-      top: 8px; right: 8px;
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 28px; height: 28px;
-      font-size: 14px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(0,0,0,0.75); color: #fff;
+      border: none; border-radius: 50%;
+      width: 26px; height: 26px; font-size: 13px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
     }
 
-    .img-note {
-      margin: 0 24px 8px;
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: none;
-    }
+    .img-note { margin: 0 22px 8px; font-size: 0.76rem; color: var(--muted); display: none; }
 
     .solver-footer {
-      padding: 0 24px 20px;
+      padding: 0 22px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -441,229 +356,218 @@
       flex-wrap: wrap;
     }
 
-    .example-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .example-btns { display: flex; gap: 7px; flex-wrap: wrap; }
 
     .example-btn {
-      font-size: 0.75rem;
-      padding: 5px 12px;
+      font-size: 0.74rem;
+      padding: 5px 11px;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 5px;
       color: var(--muted);
       cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s;
+      font-family: var(--sans);
+      transition: all 0.15s;
     }
-
-    .example-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .example-btn:hover { color: var(--gold); border-color: var(--gold); }
 
     .solve-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 24px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s;
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 26px;
+      background: var(--gold);
+      color: #0e1117;
+      border: none; border-radius: 8px;
+      font-size: 0.92rem; font-weight: 700;
+      cursor: pointer; font-family: var(--sans);
+      transition: all 0.15s;
       white-space: nowrap;
+      letter-spacing: 0.01em;
     }
+    .solve-btn:hover { background: #d4b05a; transform: translateY(-1px); }
+    .solve-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 
-    .solve-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-    .solve-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-    /* ── ANSWER BOX ── */
-    #answer-section { display: none; }
+    /* ── ANSWER ── */
+    #answer-section { display: none; margin-bottom: 22px; }
 
     .answer-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 10px;
       overflow: hidden;
     }
 
     .answer-header {
-      padding: 16px 24px;
+      padding: 14px 22px;
       border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
     }
 
-    .answer-header span {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--green);
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .answer-header-left {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; font-weight: 600; color: var(--green);
+      font-family: var(--mono);
     }
+
+    .btn-ghost {
+      padding: 6px 13px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: all 0.15s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+
+    .btn-primary {
+      padding: 9px 18px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #3a68e0; }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
 
     .answer-body {
-      padding: 24px;
-      font-size: 0.95rem;
+      padding: 22px;
+      font-size: 0.93rem;
       line-height: 1.85;
       color: var(--text);
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
-    .answer-body p { margin-bottom: 14px; }
-    .answer-body strong { color: var(--accent); font-weight: 600; }
+    .answer-body p { margin-bottom: 12px; }
+    .answer-body strong { color: var(--gold); font-weight: 600; }
+    .answer-body em { color: var(--accent); }
     .answer-body h1, .answer-body h2, .answer-body h3, .answer-body h4 {
-      color: var(--accent2);
-      margin: 20px 0 10px;
-      font-weight: 700;
+      font-family: var(--serif);
+      color: var(--text);
+      margin: 18px 0 8px;
+      font-weight: 600;
     }
-    .answer-body h1 { font-size: 1.25rem; }
-    .answer-body h2 { font-size: 1.15rem; }
-    .answer-body h3 { font-size: 1.05rem; }
-    .answer-body h4 { font-size: 1rem; }
-    .answer-body ul, .answer-body ol { margin: 10px 0 14px 22px; }
-    .answer-body li { margin-bottom: 6px; }
-    .answer-body hr { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+    .answer-body h1 { font-size: 1.2rem; }
+    .answer-body h2 { font-size: 1.08rem; }
+    .answer-body h3 { font-size: 0.98rem; }
+    .answer-body ul, .answer-body ol { margin: 8px 0 12px 20px; }
+    .answer-body li { margin-bottom: 5px; }
+    .answer-body hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
     .answer-body code {
-      background: var(--card);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85em;
+      background: var(--card); padding: 2px 6px; border-radius: 4px;
+      font-family: var(--mono); font-size: 0.83em;
     }
 
     .answer-body table {
-      width: max-content;
-      min-width: 100%;
+      width: max-content; min-width: 100%;
       border-collapse: collapse;
-      margin: 14px 0 20px;
-      font-size: 0.88rem;
+      margin: 12px 0 18px;
+      font-size: 0.86rem;
+      font-family: var(--mono);
     }
     .answer-body th, .answer-body td {
       border: 1px solid var(--border);
-      padding: 8px 12px;
+      padding: 7px 14px;
       text-align: left;
       white-space: nowrap;
     }
-    .answer-body th { background: var(--card); color: var(--accent); font-weight: 600; }
+    .answer-body th { background: var(--card); color: var(--gold); font-weight: 600; }
     .answer-body tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
-    .answer-body tbody tr:last-child td { border-top: 2px solid var(--accent); font-weight: 600; }
+    .answer-body tbody tr:last-child td { border-top: 2px solid var(--gold); font-weight: 600; }
 
+    /* ── VERIFY ── */
     .verify-box {
-      margin: 0 24px 24px;
+      margin: 0 22px 22px;
       padding: 16px;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 8px;
       display: none;
     }
 
-    .verify-label {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
+    .verify-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 10px; line-height: 1.6; }
 
-    .verify-row { display: flex; flex-direction: column; gap: 10px; }
-
+    .verify-row { display: flex; flex-direction: column; gap: 9px; }
     .verify-row textarea {
-      width: 100%;
+      width: 100%; min-height: 70px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 7px;
       padding: 9px 12px;
       color: var(--text);
-      font-family: inherit;
-      font-size: 0.88rem;
-      outline: none;
-      resize: vertical;
+      font-family: var(--sans);
+      font-size: 0.86rem;
+      outline: none; resize: vertical;
     }
-
     .verify-row textarea:focus { border-color: var(--accent); }
-
     .verify-row button { align-self: flex-start; }
 
-    .verify-result {
-      margin-top: 12px;
-      font-size: 0.85rem;
-      line-height: 1.6;
-      display: none;
-    }
+    .verify-result { margin-top: 12px; font-size: 0.85rem; line-height: 1.6; display: none; overflow-x: auto; }
 
+    /* ── LOADING ── */
     .loading {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 24px;
-      color: var(--muted);
-      font-size: 0.9rem;
+      display: flex; align-items: center; gap: 7px;
+      padding: 22px; color: var(--muted); font-size: 0.88rem;
     }
-
     .dot {
-      width: 7px; height: 7px;
-      background: var(--accent);
-      border-radius: 50%;
+      width: 6px; height: 6px;
+      background: var(--gold); border-radius: 50%;
       animation: bounce 1.2s infinite;
     }
-
     .dot:nth-child(2) { animation-delay: 0.2s; }
     .dot:nth-child(3) { animation-delay: 0.4s; }
-
     @keyframes bounce {
-      0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+      0%, 80%, 100% { transform: scale(0.65); opacity: 0.35; }
       40% { transform: scale(1); opacity: 1; }
     }
 
-    #history-section { margin-top: 32px; display: none; }
-
+    /* ── HISTORY ── */
+    #history-section { margin-top: 28px; display: none; }
     #history-section h3 {
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+      font-family: var(--mono);
+      font-size: 0.72rem; color: var(--muted);
+      font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 10px;
     }
-
     .history-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: border-color 0.2s;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;
+      cursor: pointer; transition: border-color 0.15s;
+    }
+    .history-item:hover { border-color: var(--gold); }
+    .history-q { font-size: 0.83rem; color: var(--text); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .history-meta { font-size: 0.72rem; color: var(--muted); }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 4px 0 22px;
     }
 
-    .history-item:hover { border-color: var(--accent); }
-
-    .history-q {
-      font-size: 0.85rem;
-      color: var(--text);
-      margin-bottom: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .history-meta { font-size: 0.75rem; color: var(--muted); }
-
+    /* ── FOOTER ── */
     footer {
       background: var(--surface);
       border-top: 1px solid var(--border);
       text-align: center;
       padding: 20px;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--muted);
+      line-height: 1.8;
     }
 
     @media (max-width: 600px) {
       .solver-footer { flex-direction: column; align-items: stretch; }
       .solve-btn { justify-content: center; }
       .key-row { flex-direction: column; }
-      header { flex-wrap: wrap; height: auto; padding: 10px 16px; }
+      header { flex-wrap: wrap; height: auto; padding: 10px 16px; gap: 8px; }
     }
   </style>
 </head>
@@ -671,55 +575,69 @@
 
 <header>
   <a class="logo" href="#">
-    <div class="logo-icon">📐</div>
-    <span data-i18n="site_title">BCom Math Helper</span>
+    <div class="logo-mark">📐</div>
+    <div class="logo-text">BCom <span>Math Helper</span></div>
   </a>
-  <div class="header-right">
-    <span class="badge" data-i18n="badge">Powered by Gemini AI</span>
-    <select id="lang-select" onchange="changeLang(this.value)">
-      <option value="en">English</option>
-      <option value="bn">বাংলা</option>
-    </select>
-  </div>
+  <select id="lang-select" onchange="changeLang(this.value)">
+    <option value="en">English</option>
+    <option value="bn">বাংলা</option>
+    <option value="hi">हिन्दी</option>
+    <option value="or">ଓଡ଼ିଆ</option>
+    <option value="as">অসমীয়া</option>
+    <option value="ta">தமிழ்</option>
+    <option value="te">తెలుగు</option>
+    <option value="kn">ಕನ್ನಡ</option>
+    <option value="ml">മലയാളം</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="mr">मराठी</option>
+    <option value="pa">ਪੰਜਾਬੀ</option>
+    <option value="ur">اردو</option>
+    <option value="ne">नेपाली</option>
+    <option value="mai">मैथिली</option>
+  </select>
 </header>
 
 <div class="hero">
-  <div class="hero-tag" data-i18n="hero_tag">✦ Completely Free</div>
-  <h1 data-i18n="hero_title">Solve Any BCom Math<br/>Problem Right Here</h1>
-  <p data-i18n="hero_sub">Get step-by-step solutions for Accounting, Statistics, Finance, and Partnership problems.</p>
+  <div class="hero-eyebrow" data-i18n="hero_eyebrow">Free · Step-by-step · For BCom Students</div>
+  <h1 data-i18n="hero_title">Solve Any BCom Math<br/><em>Problem Right Here</em></h1>
+  <p data-i18n="hero_sub">Accounting, Statistics, Finance, Partnership — get complete solutions with every step shown.</p>
 </div>
 
-<div class="topics">
-  <span class="chip active" onclick="setTopic(this, '')" data-i18n="topic_all">All Subjects</span>
-  <span class="chip" onclick="setTopic(this, 'Accounting')">Accounting</span>
-  <span class="chip" onclick="setTopic(this, 'Statistics')">Statistics</span>
-  <span class="chip" onclick="setTopic(this, 'Mathematics of Finance')">Mathematics of Finance</span>
-  <span class="chip" onclick="setTopic(this, 'Partnership Accounts')">Partnership Accounts</span>
-  <span class="chip" onclick="setTopic(this, 'Company Accounts')">Company Accounts</span>
-  <span class="chip" onclick="setTopic(this, 'Cost Accounting')">Cost Accounting</span>
-  <span class="chip" onclick="setTopic(this, 'Income Tax')">Income Tax</span>
+<div class="topics-wrap">
+  <div class="topics-label" data-i18n="filter_label">Filter by subject</div>
+  <div class="topics">
+    <span class="chip active" onclick="setTopic(this,'')" data-i18n="topic_all">All Subjects</span>
+    <span class="chip" onclick="setTopic(this,'Accounting')">Accounting</span>
+    <span class="chip" onclick="setTopic(this,'Statistics')">Statistics</span>
+    <span class="chip" onclick="setTopic(this,'Mathematics of Finance')">Mathematics of Finance</span>
+    <span class="chip" onclick="setTopic(this,'Partnership Accounts')">Partnership Accounts</span>
+    <span class="chip" onclick="setTopic(this,'Company Accounts')">Company Accounts</span>
+    <span class="chip" onclick="setTopic(this,'Cost Accounting')">Cost Accounting</span>
+    <span class="chip" onclick="setTopic(this,'Income Tax')">Income Tax</span>
+  </div>
 </div>
 
 <main>
+  <hr class="section-divider" />
 
-  <!-- OWN KEY SETUP (collapsible, optional) -->
+  <!-- OWN KEY -->
   <div id="setup-card">
     <div class="setup-toggle" onclick="toggleSetup()">
-      <div class="setup-toggle-left">
-        <span id="key-using-badge" class="using-indicator shared" data-i18n="using_shared">Using shared quota</span>
+      <div class="setup-left">
+        <span id="key-using-badge" class="using-badge shared" data-i18n="using_shared">Shared quota</span>
         <div>
-          <h2 data-i18n="setup_title">🔑 Add your own Gemini API Key (optional)</h2>
-          <div class="sub" data-i18n="setup_sub">Increase your daily limit to 1,500 requests</div>
+          <div class="setup-title" data-i18n="setup_title">Add your own Gemini API Key <span style="color:var(--muted);font-weight:400;">(optional)</span></div>
+          <div class="setup-sub" data-i18n="setup_sub">Get 1,500 requests/day just for you</div>
         </div>
       </div>
       <span class="chevron" id="setup-chevron">▾</span>
     </div>
     <div id="setup-body">
-      <div id="setup-body-inner">
-        <p data-i18n="setup_desc">By default you're sharing a limited pool of free requests with other students. Add your own free Gemini API key from aistudio.google.com to get your own 1,500 requests/day. Your key stays only in your browser — it's never sent anywhere except directly to Google.</p>
+      <div class="setup-inner">
+        <p data-i18n="setup_desc">By default you share a free request pool with other students. Add your own free key from aistudio.google.com for your own 1,500 daily requests. Your key stays in your browser only.</p>
         <div class="key-row">
           <input type="password" id="api-key-input" placeholder="AIza... or AQ..." />
-          <button class="btn btn-primary" onclick="saveKey()" data-i18n="save_btn">Save</button>
+          <button class="btn-primary" onclick="saveKey()" data-i18n="save_btn">Save</button>
         </div>
         <div id="key-status" class="key-status"></div>
       </div>
@@ -734,31 +652,31 @@
     </div>
 
     <div class="tab-row">
-      <button class="tab active" onclick="switchTab('text')" data-i18n="tab_text">✏️ Type</button>
-      <button class="tab" onclick="switchTab('image')" data-i18n="tab_image">📷 Upload Image</button>
+      <button class="tab active" onclick="switchTab('text',this)" data-i18n="tab_text">✏️ Type</button>
+      <button class="tab" onclick="switchTab('image',this)" data-i18n="tab_image">📷 Upload Photo</button>
     </div>
 
     <div id="tab-text">
       <div class="textarea-wrap">
-        <textarea id="problem-input" rows="5" data-i18n-placeholder="problem_placeholder"
-          placeholder="Example: The cost price of goods is ₹5000. If profit is 20% on sale price, find the sale price."></textarea>
+        <textarea id="problem-input" rows="5" data-i18n-ph="problem_ph"
+          placeholder="Example: A machine costs ₹50,000. Annual depreciation is 10%. Find the book value after 3 years using SLM."></textarea>
       </div>
     </div>
 
-    <div id="tab-image" style="display:none; padding-top:16px;">
-      <div class="upload-btn-wrap">
-        <label for="img-input" class="upload-label" data-i18n="upload_label">📷 Camera / Gallery</label>
+    <div id="tab-image" style="display:none; padding-top:14px;">
+      <div class="upload-wrap">
+        <label for="img-input" class="upload-label" data-i18n="upload_btn">📷 Choose Photo</label>
         <input type="file" id="img-input" accept="image/*" onchange="handleImage(event)" />
+        <div id="upload-placeholder" data-i18n="upload_ph">Photo will appear here after selection</div>
       </div>
-      <div id="upload-area" data-i18n="upload_area_text">Selected image will appear here</div>
       <div class="image-preview-wrap" id="img-preview-wrap">
-        <img id="img-preview" src="" alt="Question image" />
+        <img id="img-preview" src="" alt="Question" />
         <button class="remove-img" onclick="removeImage()">✕</button>
       </div>
-      <div class="img-note" id="img-note" data-i18n="img_note">💡 If the image has multiple questions, mention the question number below.</div>
+      <div class="img-note" id="img-note" data-i18n="img_note">💡 If the photo has multiple questions, specify the question number below.</div>
       <div class="textarea-wrap" style="padding-top:0;">
-        <textarea id="img-extra" rows="2" data-i18n-placeholder="img_extra_placeholder"
-          placeholder="Optional: Which question number do you want solved? (e.g. Q.3, Q.5b)"></textarea>
+        <textarea id="img-extra" rows="2" data-i18n-ph="img_extra_ph"
+          placeholder="Optional: Which question to solve? (e.g. Q.3 or Q.5b)"></textarea>
       </div>
     </div>
 
@@ -771,173 +689,129 @@
         <button class="example-btn" onclick="fillExample(4)">Partnership</button>
       </div>
       <button class="solve-btn" id="solve-btn" onclick="solveProblem()">
-        <span data-i18n="solve_btn">Solve</span>
-        <span>→</span>
+        <span data-i18n="solve_btn">Solve</span> →
       </button>
     </div>
   </div>
 
+  <!-- ANSWER -->
   <div id="answer-section">
     <div class="answer-card">
       <div class="answer-header">
-        <span data-i18n="solution_label">✦ Solution</span>
-        <button class="btn btn-ghost" onclick="copyAnswer()" style="font-size:0.78rem;padding:6px 12px;" data-i18n="copy_btn">Copy</button>
+        <div class="answer-header-left">✦ <span data-i18n="solution_label">Solution</span></div>
+        <button class="btn-ghost" onclick="copyAnswer()" data-i18n="copy_btn">Copy</button>
       </div>
       <div id="answer-body" class="answer-body"></div>
 
       <div class="verify-box">
-        <div class="verify-label" data-i18n="verify_label">📖 Know the textbook answer? Check against it — if multiple parts, write each on a new line</div>
+        <div class="verify-label" data-i18n="verify_label">📖 Know the textbook answer? Paste it below to verify — for multiple parts, use separate lines.</div>
         <div class="verify-row">
-          <textarea id="verify-input" rows="2" data-i18n-placeholder="verify_placeholder" placeholder="e.g.&#10;Machine I rate = ₹35&#10;Machine II rate = ₹42&#10;Machine III rate = ₹48"></textarea>
-          <button class="btn btn-primary" onclick="verifyAnswer()" id="verify-btn" data-i18n="verify_btn">Check Against Answer</button>
+          <textarea id="verify-input" rows="3" data-i18n-ph="verify_ph"
+            placeholder="Answer A = 35&#10;Answer B = 42&#10;Answer C = 48"></textarea>
+          <button class="btn-primary" onclick="verifyAnswer()" id="verify-btn" data-i18n="verify_btn">Check Answer</button>
         </div>
         <div id="verify-result" class="verify-result"></div>
       </div>
     </div>
   </div>
 
+  <!-- HISTORY -->
   <div id="history-section">
-    <h3 data-i18n="history_title">Previous Problems</h3>
+    <h3 data-i18n="history_title">Recent Problems</h3>
     <div id="history-list"></div>
   </div>
-
 </main>
 
 <footer>
-  <span data-i18n="footer_text">BCom Math Helper — completely free for all BCom students in West Bengal.</span><br/>
-  <span data-i18n="footer_note">AI can make mistakes — please verify important answers.</span>
+  <span data-i18n="footer1">BCom Math Helper — free for all BCom students.</span><br/>
+  <span data-i18n="footer2">AI can make mistakes. Always verify important answers.</span>
 </footer>
 
 <script>
-  // ════════════════════════════════════════════
-  // CONFIG — এখানে নিজের backend URL বসাও (Vercel deploy এর পর)
-  // ════════════════════════════════════════════
-  const BACKEND_URL = '/api/solve'; // same-domain হলে এটাই থাকবে, আলাদা domain হলে full URL দাও
+  const BACKEND_URL = '/api/solve';
 
-  // ════════════════════════════════════════════
-  // I18N — TRANSLATIONS
-  // ════════════════════════════════════════════
-  const translations = {
+  // ── TRANSLATIONS ──
+  const T = {
     en: {
-      site_title: 'BCom Math Helper',
-      badge: 'Powered by Gemini AI',
-      hero_tag: '✦ Completely Free',
-      hero_title: 'Solve Any BCom Math<br/>Problem Right Here',
-      hero_sub: 'Get step-by-step solutions for Accounting, Statistics, Finance, and Partnership problems.',
-      topic_all: 'All Subjects',
-      using_shared: 'Using shared quota',
-      using_own: 'Using your key',
-      setup_title: '🔑 Add your own Gemini API Key (optional)',
-      setup_sub: 'Increase your daily limit to 1,500 requests',
-      setup_desc: "By default you're sharing a limited pool of free requests with other students. Add your own free Gemini API key from aistudio.google.com to get your own 1,500 requests/day. Your key stays only in your browser — it's never sent anywhere except directly to Google.",
-      save_btn: 'Save',
-      solver_title: 'Enter Your Problem',
-      solver_sub: 'Type it out, or upload a photo of the question.',
-      tab_text: '✏️ Type',
-      tab_image: '📷 Upload Image',
-      problem_placeholder: 'Example: The cost price of goods is ₹5000. If profit is 20% on sale price, find the sale price.',
-      upload_label: '📷 Camera / Gallery',
-      upload_area_text: 'Selected image will appear here',
-      img_note: '💡 If the image has multiple questions, mention the question number below.',
-      img_extra_placeholder: 'Optional: Which question number do you want solved? (e.g. Q.3, Q.5b)',
-      solve_btn: 'Solve',
-      solution_label: '✦ Solution',
-      copy_btn: 'Copy',
-      verify_label: '📖 Know the textbook answer? Check against it — if multiple parts, write each on a new line',
-      verify_placeholder: 'e.g.\nMachine I rate = ₹35\nMachine II rate = ₹42\nMachine III rate = ₹48',
-      verify_btn: 'Check Against Answer',
-      history_title: 'Previous Problems',
-      footer_text: 'BCom Math Helper — completely free for all BCom students in West Bengal.',
-      footer_note: 'AI can make mistakes — please verify important answers.',
-      solving: 'Gemini is thinking...',
-      retrying: 'Server busy, retrying',
-      key_saved: '✓ API Key saved!',
-      key_invalid: '✗ Enter a valid API key',
-      enter_problem: 'Please enter a problem first.',
-      upload_first: 'Please upload an image first.',
-      copied: 'Solution copied!',
-      no_answer: 'No answer received.',
-      conn_error: '❌ Connection error. Please check your internet.',
-      enter_book_answer: 'Please enter the textbook answer first.',
-      checking: 'Checking against answer...'
+      hero_eyebrow:'Free · Step-by-step · For BCom Students',
+      hero_title:'Solve Any BCom Math<br/><em>Problem Right Here</em>',
+      hero_sub:'Accounting, Statistics, Finance, Partnership — get complete solutions with every step shown.',
+      filter_label:'Filter by subject',topic_all:'All Subjects',
+      using_shared:'Shared quota',using_own:'Your key active',
+      setup_title:'Add your own Gemini API Key',setup_sub:'Get 1,500 requests/day just for you',
+      setup_desc:'By default you share a free request pool with other students. Add your own free key from aistudio.google.com for your own 1,500 daily requests. Your key stays in your browser only.',
+      save_btn:'Save',key_saved:'✓ Key saved!',key_invalid:'✗ Enter a valid key',
+      solver_title:'Enter Your Problem',solver_sub:'Type it out, or upload a photo of the question.',
+      tab_text:'✏️ Type',tab_image:'📷 Upload Photo',
+      problem_ph:'Example: A machine costs ₹50,000. Annual depreciation is 10%. Find the book value after 3 years using SLM.',
+      upload_btn:'📷 Choose Photo',upload_ph:'Photo will appear here after selection',
+      img_note:'💡 If the photo has multiple questions, specify the question number below.',
+      img_extra_ph:'Optional: Which question to solve? (e.g. Q.3 or Q.5b)',
+      solve_btn:'Solve',solution_label:'Solution',copy_btn:'Copy',
+      verify_label:'📖 Know the textbook answer? Paste it below to verify — for multiple parts, use separate lines.',
+      verify_ph:'Answer A = 35\nAnswer B = 42\nAnswer C = 48',
+      verify_btn:'Check Answer',history_title:'Recent Problems',
+      footer1:'BCom Math Helper — free for all BCom students.',
+      footer2:'AI can make mistakes. Always verify important answers.',
+      solving:'Solving your problem...',retrying:'Server busy, retrying',
+      enter_problem:'Please enter a problem first.',upload_first:'Please upload a photo first.',
+      copied:'Solution copied!',no_answer:'No answer received.',
+      conn_error:'❌ Connection error. Check your internet.',
+      enter_book_ans:'Please enter the textbook answer first.',checking:'Checking...',
+      lang_name:'English'
     },
     bn: {
-      site_title: 'BCom গণিত সহায়ক',
-      badge: 'Powered by Gemini AI',
-      hero_tag: '✦ সম্পূর্ণ বিনামূল্যে',
-      hero_title: 'BCom-এর যেকোনো অংক<br/>এখানেই সমাধান করো',
-      hero_sub: 'Accounting, Statistics, Finance, Partnership — সব ধরনের অংক step-by-step সমাধান পাও।',
-      topic_all: 'সব বিষয়',
-      using_shared: 'Shared quota ব্যবহার হচ্ছে',
-      using_own: 'তোমার key ব্যবহার হচ্ছে',
-      setup_title: '🔑 নিজের Gemini API Key যোগ করো (ঐচ্ছিক)',
-      setup_sub: 'দৈনিক limit বাড়িয়ে ১,৫০০ request করো',
-      setup_desc: 'এখন তুমি অন্য students-দের সাথে একটা সীমিত free quota ভাগ করছো। aistudio.google.com থেকে নিজের ফ্রি Gemini API key যোগ করলে নিজের ১,৫০০ request/day পাবে। তোমার key শুধু browser-এ থাকবে, Google ছাড়া আর কোথাও পাঠানো হবে না।',
-      save_btn: 'সেভ করো',
-      solver_title: 'অংকটি দাও',
-      solver_sub: 'টাইপ করো অথবা প্রশ্নের ছবি তুলে আপলোড করো।',
-      tab_text: '✏️ টাইপ করো',
-      tab_image: '📷 ছবি আপলোড',
-      problem_placeholder: 'উদাহরণ: একটি দোকানে পণ্যের ক্রয়মূল্য ৫০০০ টাকা। বিক্রয়মূল্যের উপর ২০% লাভ হলে বিক্রয়মূল্য কত?',
-      upload_label: '📷 ক্যামেরা / গ্যালারি',
-      upload_area_text: 'ছবি বেছে নেওয়ার পর এখানে দেখাবে',
-      img_note: '💡 ছবিতে একাধিক প্রশ্ন থাকলে নিচে question number বলে দাও।',
-      img_extra_placeholder: 'ঐচ্ছিক: কোন প্রশ্ন নম্বর সমাধান করতে চাও? (যেমন: Q.3, Q.5b)',
-      solve_btn: 'সমাধান করো',
-      solution_label: '✦ সমাধান',
-      copy_btn: 'কপি করো',
-      verify_label: '📖 বইয়ের উত্তর জানা থাকলে মিলিয়ে নাও — একাধিক অংশ থাকলে আলাদা লাইনে লেখো',
-      verify_placeholder: 'যেমন:\nMachine I rate = ₹৩৫\nMachine II rate = ₹৪২\nMachine III rate = ₹৪৮',
-      verify_btn: 'মিলিয়ে দেখো',
-      history_title: 'আগের অংকগুলো',
-      footer_text: 'BCom গণিত সহায়ক — West Bengal-এর সব BCom students-দের জন্য সম্পূর্ণ বিনামূল্যে।',
-      footer_note: 'AI ভুলও করতে পারে — গুরুত্বপূর্ণ উত্তর একবার যাচাই করে নিও।',
-      solving: 'Gemini ভাবছে...',
-      retrying: 'সার্ভার ব্যস্ত আছে, আবার চেষ্টা হচ্ছে',
-      key_saved: '✓ API Key সেভ হয়েছে!',
-      key_invalid: '✗ সঠিক API Key দাও',
-      enter_problem: 'অংকটি লেখো আগে।',
-      upload_first: 'আগে প্রশ্নের ছবি আপলোড করো।',
-      copied: 'সমাধান কপি হয়েছে!',
-      no_answer: 'উত্তর পাওয়া যায়নি।',
-      conn_error: '❌ সংযোগে সমস্যা হয়েছে। Internet connection চেক করো।',
-      enter_book_answer: 'বইয়ের উত্তরটা লেখো আগে।',
-      checking: 'মিলিয়ে দেখা হচ্ছে...'
-    }
+      hero_eyebrow:'বিনামূল্যে · ধাপে ধাপে · BCom ছাত্রদের জন্য',
+      hero_title:'BCom-এর যেকোনো অংক<br/><em>এখানেই সমাধান করো</em>',
+      hero_sub:'Accounting, Statistics, Finance, Partnership — প্রতিটি ধাপ দেখিয়ে সম্পূর্ণ সমাধান পাও।',
+      filter_label:'বিষয় অনুযায়ী ছাঁকো',topic_all:'সব বিষয়',
+      using_shared:'Shared quota',using_own:'তোমার key চালু',
+      setup_title:'নিজের Gemini API Key যোগ করো',setup_sub:'দৈনিক ১,৫০০ request শুধু তোমার জন্য',
+      setup_desc:'এখন তুমি অন্য students-দের সাথে quota ভাগ করছো। aistudio.google.com থেকে ফ্রি key নিয়ে নিজের ১,৫০০ request/day পাও। তোমার key শুধু browser-এ থাকবে।',
+      save_btn:'সেভ করো',key_saved:'✓ Key সেভ হয়েছে!',key_invalid:'✗ সঠিক key দাও',
+      solver_title:'অংকটি দাও',solver_sub:'টাইপ করো অথবা প্রশ্নের ছবি আপলোড করো।',
+      tab_text:'✏️ টাইপ করো',tab_image:'📷 ছবি আপলোড',
+      problem_ph:'উদাহরণ: একটি যন্ত্রের ক্রয়মূল্য ৫০,০০০ টাকা। বার্ষিক অবচয় ১০%। SLM পদ্ধতিতে ৩ বছর পর বইমূল্য বের করো।',
+      upload_btn:'📷 ছবি বেছে নাও',upload_ph:'ছবি select করলে এখানে দেখাবে',
+      img_note:'💡 ছবিতে একাধিক প্রশ্ন থাকলে নিচে question number বলে দাও।',
+      img_extra_ph:'ঐচ্ছিক: কোন প্রশ্ন solve করতে চাও? (যেমন Q.3 বা Q.5b)',
+      solve_btn:'সমাধান করো',solution_label:'সমাধান',copy_btn:'কপি করো',
+      verify_label:'📖 বইয়ের উত্তর জানা থাকলে মিলিয়ে নাও — একাধিক অংশ থাকলে আলাদা লাইনে লেখো।',
+      verify_ph:'Answer A = ৩৫\nAnswer B = ৪২\nAnswer C = ৪৮',
+      verify_btn:'মিলিয়ে দেখো',history_title:'আগের অংকগুলো',
+      footer1:'BCom গণিত সহায়ক — সব BCom ছাত্রদের জন্য বিনামূল্যে।',
+      footer2:'AI ভুলও করতে পারে। গুরুত্বপূর্ণ উত্তর যাচাই করে নিও।',
+      solving:'সমাধান হচ্ছে...',retrying:'সার্ভার ব্যস্ত, আবার চেষ্টা হচ্ছে',
+      enter_problem:'অংকটি লেখো আগে।',upload_first:'আগে ছবি আপলোড করো।',
+      copied:'সমাধান কপি হয়েছে!',no_answer:'উত্তর পাওয়া যায়নি।',
+      conn_error:'❌ সংযোগে সমস্যা। Internet চেক করো।',
+      enter_book_ans:'বইয়ের উত্তর লেখো আগে।',checking:'মিলিয়ে দেখা হচ্ছে...',
+      lang_name:'বাংলা'
+    },
+    hi: { hero_eyebrow:'मुफ़्त · चरण-दर-चरण · BCom छात्रों के लिए', hero_title:'BCom का कोई भी गणित<br/><em>यहाँ हल करें</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — हर चरण के साथ पूरा हल पाएं।', filter_label:'विषय अनुसार फ़िल्टर', topic_all:'सभी विषय', using_shared:'Shared quota', using_own:'आपकी key सक्रिय', setup_title:'अपनी Gemini API Key जोड़ें', setup_sub:'प्रतिदिन 1,500 अनुरोध सिर्फ आपके लिए', setup_desc:'अभी आप अन्य छात्रों के साथ quota साझा कर रहे हैं। aistudio.google.com से अपनी मुफ़्त key जोड़ें।', save_btn:'सहेजें', key_saved:'✓ Key सहेजी गई!', key_invalid:'✗ वैध key दर्ज करें', solver_title:'प्रश्न दर्ज करें', solver_sub:'टाइप करें या फोटो अपलोड करें।', tab_text:'✏️ टाइप', tab_image:'📷 फोटो', problem_ph:'उदाहरण: एक मशीन की लागत ₹50,000 है। वार्षिक मूल्यह्रास 10% है। SLM पद्धति से 3 वर्ष बाद पुस्तक मूल्य ज्ञात करें।', upload_btn:'📷 फोटो चुनें', upload_ph:'फोटो यहाँ दिखेगा', img_note:'💡 यदि फोटो में कई प्रश्न हैं, तो नीचे प्रश्न संख्या बताएं।', img_extra_ph:'वैकल्पिक: कौन सा प्रश्न हल करना है? (जैसे Q.3)', solve_btn:'हल करें', solution_label:'हल', copy_btn:'कॉपी', verify_label:'📖 पाठ्यपुस्तक का उत्तर जानते हैं? नीचे दर्ज करें।', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'जाँचें', history_title:'पिछले प्रश्न', footer1:'BCom Math Helper — सभी BCom छात्रों के लिए मुफ़्त।', footer2:'AI गलती कर सकता है। महत्वपूर्ण उत्तर सत्यापित करें।', solving:'हल किया जा रहा है...', retrying:'सर्वर व्यस्त है, पुनः प्रयास...', enter_problem:'पहले प्रश्न दर्ज करें।', upload_first:'पहले फोटो अपलोड करें।', copied:'हल कॉपी किया!', no_answer:'कोई उत्तर नहीं मिला।', conn_error:'❌ कनेक्शन त्रुटि।', enter_book_ans:'पाठ्यपुस्तक उत्तर दर्ज करें।', checking:'जाँचा जा रहा है...', lang_name:'हिन्दी' },
+    or: { hero_eyebrow:'ବିନାମୂଲ୍ୟ · ପଦକ୍ରମ · BCom ଛାତ୍ରଙ୍କ ପାଇଁ', hero_title:'BCom-ର ଯେକୌଣସି ଗଣିତ<br/><em>ଏଠାରେ ସମାଧାନ କରନ୍ତୁ</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — ପ୍ରତ୍ୟେକ ପଦକ୍ଷେପ ସହ ସମ୍ପୂର୍ଣ ସମାଧାନ।', filter_label:'ବିଷୟ ଅନୁଯାୟୀ', topic_all:'ସମସ୍ତ ବିଷୟ', using_shared:'Shared quota', using_own:'ଆପଣଙ୍କ key ସକ୍ରିୟ', setup_title:'ନିଜ Gemini API Key ଯୋଗ କରନ୍ତୁ', setup_sub:'ଦୈନିକ 1,500 request', setup_desc:'aistudio.google.com ରୁ ବିନାମୂଲ୍ୟ key ନିଅନ୍ତୁ।', save_btn:'ସଂରକ୍ଷଣ', key_saved:'✓ Key ସଂରକ୍ଷିତ!', key_invalid:'✗ ବୈଧ key ଦିଅନ୍ତୁ', solver_title:'ପ୍ରଶ୍ନ ଲିଖନ୍ତୁ', solver_sub:'ଟାଇପ୍ କରନ୍ତୁ ବା ଫଟୋ ଅପଲୋଡ଼ କରନ୍ତୁ।', tab_text:'✏️ ଟାଇପ', tab_image:'📷 ଫଟୋ', problem_ph:'ଉଦାହରଣ: ଏକ ଯନ୍ତ୍ରର ମୂଲ୍ୟ ₹50,000। ବାର୍ଷିକ ଅବକ୍ଷୟ 10%। SLM ଅନୁଯାୟୀ 3 ବର୍ଷ ପରେ ପୁସ୍ତକ ମୂଲ୍ୟ ଖୋଜ।', upload_btn:'📷 ଫଟୋ ବଛନ୍ତୁ', upload_ph:'ଫଟୋ ଏଠାରେ ଦେଖାଯିବ', img_note:'💡 ଏକାଧିକ ପ୍ରଶ୍ନ ଥିଲେ ନମ୍ବର ଉଲ୍ଲେଖ କରନ୍ତୁ।', img_extra_ph:'ଐଚ୍ଛିକ: କେଉଁ ପ୍ରଶ୍ନ ସମାଧାନ?', solve_btn:'ସମାଧାନ', solution_label:'ସମାଧାନ', copy_btn:'କପି', verify_label:'📖 ଉତ୍ତର ଯାଞ୍ଚ କରନ୍ତୁ', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'ଯାଞ୍ଚ', history_title:'ପୂର୍ବ ପ୍ରଶ୍ନ', footer1:'BCom Math Helper — ସମସ୍ତ BCom ଛାତ୍ରଙ୍କ ପାଇଁ ବିନାମୂଲ୍ୟ।', footer2:'AI ଭୁଲ ହୋଇ ପାରେ। ଗୁରୁତ୍ୱପୂର୍ଣ ଉତ୍ତର ଯାଞ୍ଚ କରନ୍ତୁ।', solving:'ସମାଧାନ ହେଉଛି...', retrying:'ପୁଣି ଚେଷ୍ଟା...', enter_problem:'ପ୍ରଶ୍ନ ଲିଖନ୍ତୁ।', upload_first:'ଫଟୋ ଅପଲୋଡ଼ କରନ୍ତୁ।', copied:'କପି ହୋଇଛି!', no_answer:'ଉତ୍ତର ମିଳିଲା ନାହିଁ।', conn_error:'❌ ସଂଯୋଗ ତ୍ରୁଟି।', enter_book_ans:'ଉତ୍ତର ଲିଖନ୍ତୁ।', checking:'ଯାଞ୍ଚ ହେଉଛି...', lang_name:'ଓଡ଼ିଆ' },
+    as: { hero_eyebrow:'বিনামূলীয়া · পদক্ষেপ-দৰ-পদক্ষেপ · BCom শিক্ষাৰ্থীৰ বাবে', hero_title:'BCom-ৰ যিকোনো গণিত<br/><em>ইয়াতে সমাধান কৰক</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — সম্পূৰ্ণ সমাধান পাওক।', filter_label:'বিষয় অনুযায়ী', topic_all:'সকলো বিষয়', using_shared:'Shared quota', using_own:'আপোনাৰ key সক্ৰিয়', setup_title:'নিজৰ Gemini API Key যোগ কৰক', setup_sub:'দৈনিক 1,500 request', setup_desc:'aistudio.google.com ৰ পৰা বিনামূলীয়া key লওক।', save_btn:'সংৰক্ষণ', key_saved:'✓ Key সংৰক্ষিত!', key_invalid:'✗ বৈধ key দিয়ক', solver_title:'প্ৰশ্নটো দিয়ক', solver_sub:'টাইপ কৰক বা ফটো আপলোড কৰক।', tab_text:'✏️ টাইপ', tab_image:'📷 ফটো', problem_ph:'উদাহৰণ: এটা যন্ত্ৰৰ মূল্য ₹50,000। বাৰ্ষিক অৱমূল্যায়ন 10%। SLM পদ্ধতিত 3 বছৰ পিছত পুথি মূল্য বিচাৰক।', upload_btn:'📷 ফটো বাছক', upload_ph:'ফটো ইয়াত দেখা যাব', img_note:'💡 একাধিক প্ৰশ্ন থাকিলে নম্বৰ উল্লেখ কৰক।', img_extra_ph:'ঐচ্ছিক: কোনটো প্ৰশ্ন?', solve_btn:'সমাধান', solution_label:'সমাধান', copy_btn:'কপি', verify_label:'📖 উত্তৰ পৰীক্ষা কৰক', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'পৰীক্ষা', history_title:'আগৰ প্ৰশ্নসমূহ', footer1:'BCom Math Helper — সকলো BCom শিক্ষাৰ্থীৰ বাবে বিনামূলীয়া।', footer2:'AI ভুল কৰিব পাৰে। গুৰুত্বপূৰ্ণ উত্তৰ পৰীক্ষা কৰক।', solving:'সমাধান হৈছে...', retrying:'পুনৰ চেষ্টা...', enter_problem:'প্ৰশ্ন লিখক।', upload_first:'ফটো আপলোড কৰক।', copied:'কপি হৈছে!', no_answer:'উত্তৰ পোৱা নগ\'ল।', conn_error:'❌ সংযোগ সমস্যা।', enter_book_ans:'উত্তৰ লিখক।', checking:'পৰীক্ষা হৈছে...', lang_name:'অসমীয়া' },
+    ta: { hero_eyebrow:'இலவசம் · படிப்படியாக · BCom மாணவர்களுக்கு', hero_title:'BCom கணிதம் எதுவும்<br/><em>இங்கே தீர்வு காணுங்கள்</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — ஒவ்வொரு படியுடன் முழுமையான தீர்வு.', filter_label:'பாடம் வாரியாக', topic_all:'அனைத்து பாடங்கள்', using_shared:'பகிரப்பட்ட quota', using_own:'உங்கள் key செயலில்', setup_title:'உங்கள் Gemini API Key சேர்க்கவும்', setup_sub:'தினமும் 1,500 கோரிக்கைகள்', setup_desc:'aistudio.google.com இலிருந்து இலவச key பெறுங்கள்.', save_btn:'சேமி', key_saved:'✓ Key சேமிக்கப்பட்டது!', key_invalid:'✗ சரியான key கொடுங்கள்', solver_title:'கேள்வியை உள்ளிடுங்கள்', solver_sub:'தட்டச்சு செய்யுங்கள் அல்லது புகைப்படம் பதிவேற்றுங்கள்.', tab_text:'✏️ தட்டச்சு', tab_image:'📷 புகைப்படம்', problem_ph:'எடுத்துக்காட்டு: ஒரு இயந்திரத்தின் செலவு ₹50,000. ஆண்டு தேய்மானம் 10%. SLM முறையில் 3 ஆண்டுகளுக்கு பிறகு புத்தக மதிப்பு காண்க.', upload_btn:'📷 புகைப்படம் தேர்வு', upload_ph:'புகைப்படம் இங்கே தோன்றும்', img_note:'💡 பல கேள்விகள் இருந்தால் எண்ணை குறிப்பிடுங்கள்.', img_extra_ph:'விருப்பத்தேர்வு: எந்த கேள்வி?', solve_btn:'தீர்வு', solution_label:'தீர்வு', copy_btn:'நகல்', verify_label:'📖 பாடப்புத்தக விடை சரிபார்க்கவும்', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'சரிபார்', history_title:'முந்தைய கேள்விகள்', footer1:'BCom Math Helper — அனைத்து BCom மாணவர்களுக்கும் இலவசம்.', footer2:'AI தவறு செய்யலாம். முக்கியமான விடைகளை சரிபார்க்கவும்.', solving:'தீர்க்கப்படுகிறது...', retrying:'மீண்டும் முயற்சி...', enter_problem:'முதலில் கேள்வி உள்ளிடுங்கள்.', upload_first:'முதலில் புகைப்படம் பதிவேற்றுங்கள்.', copied:'நகல் எடுக்கப்பட்டது!', no_answer:'விடை கிடைக்கவில்லை.', conn_error:'❌ இணைப்பு பிழை.', enter_book_ans:'விடையை உள்ளிடுங்கள்.', checking:'சரிபார்க்கப்படுகிறது...', lang_name:'தமிழ்' },
+    te: { hero_eyebrow:'ఉచితం · దశల వారీగా · BCom విద్యార్థులకు', hero_title:'BCom గణితం ఏదైనా<br/><em>ఇక్కడ పరిష్కరించండి</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — ప్రతి దశతో పూర్తి పరిష్కారం.', filter_label:'విషయం వారీగా', topic_all:'అన్ని విషయాలు', using_shared:'Shared quota', using_own:'మీ key సక్రియంగా ఉంది', setup_title:'మీ Gemini API Key జోడించండి', setup_sub:'రోజుకు 1,500 అభ్యర్థనలు', setup_desc:'aistudio.google.com నుండి ఉచిత key పొందండి.', save_btn:'సేవ్', key_saved:'✓ Key సేవ్ అయింది!', key_invalid:'✗ చెల్లుబాటు అయ్యే key ఇవ్వండి', solver_title:'సమస్యను నమోదు చేయండి', solver_sub:'టైప్ చేయండి లేదా ఫోటో అప్లోడ్ చేయండి.', tab_text:'✏️ టైప్', tab_image:'📷 ఫోటో', problem_ph:'ఉదాహరణ: ఒక యంత్రం ₹50,000 ఖర్చవుతుంది. వార్షిక తరుగుదల 10%. SLM పద్ధతిలో 3 సంవత్సరాల తర్వాత పుస్తక విలువ కనుగొనండి.', upload_btn:'📷 ఫోటో ఎంచుకోండి', upload_ph:'ఫోటో ఇక్కడ కనిపిస్తుంది', img_note:'💡 అనేక ప్రశ్నలుంటే సంఖ్యను పేర్కొనండి.', img_extra_ph:'ఐచ్ఛికం: ఏ ప్రశ్న?', solve_btn:'పరిష్కరించు', solution_label:'పరిష్కారం', copy_btn:'కాపీ', verify_label:'📖 పాఠ్యపుస్తక సమాధానం తనిఖీ చేయండి', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'తనిఖీ చేయండి', history_title:'మునుపటి సమస్యలు', footer1:'BCom Math Helper — అందరి BCom విద్యార్థులకు ఉచితం.', footer2:'AI తప్పులు చేయవచ్చు. ముఖ్యమైన సమాధానాలు తనిఖీ చేయండి.', solving:'పరిష్కరిస్తోంది...', retrying:'మళ్ళీ ప్రయత్నిస్తోంది...', enter_problem:'ముందు సమస్యను నమోదు చేయండి.', upload_first:'ముందు ఫోటో అప్లోడ్ చేయండి.', copied:'కాపీ చేయబడింది!', no_answer:'సమాధానం లభించలేదు.', conn_error:'❌ కనెక్షన్ లోపం.', enter_book_ans:'సమాధానం నమోదు చేయండి.', checking:'తనిఖీ అవుతోంది...', lang_name:'తెలుగు' },
+    kn: { hero_eyebrow:'ಉಚಿತ · ಹಂತ-ಹಂತವಾಗಿ · BCom ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ', hero_title:'BCom ಗಣಿತ ಏನೇ ಆದರೂ<br/><em>ಇಲ್ಲಿ ಪರಿಹರಿಸಿ</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — ಪ್ರತಿ ಹಂತದೊಂದಿಗೆ ಸಂಪೂರ್ಣ ಪರಿಹಾರ.', filter_label:'ವಿಷಯದ ಮೂಲಕ', topic_all:'ಎಲ್ಲ ವಿಷಯಗಳು', using_shared:'Shared quota', using_own:'ನಿಮ್ಮ key ಸಕ್ರಿಯ', setup_title:'ನಿಮ್ಮ Gemini API Key ಸೇರಿಸಿ', setup_sub:'ದಿನಕ್ಕೆ 1,500 ವಿನಂತಿಗಳು', setup_desc:'aistudio.google.com ನಿಂದ ಉಚಿತ key ಪಡೆಯಿರಿ.', save_btn:'ಉಳಿಸಿ', key_saved:'✓ Key ಉಳಿಸಲಾಗಿದೆ!', key_invalid:'✗ ಮಾನ್ಯ key ನೀಡಿ', solver_title:'ಸಮಸ್ಯೆಯನ್ನು ನಮೂದಿಸಿ', solver_sub:'ಟೈಪ್ ಮಾಡಿ ಅಥವಾ ಫೋಟೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ.', tab_text:'✏️ ಟೈಪ್', tab_image:'📷 ಫೋಟೋ', problem_ph:'ಉದಾಹರಣೆ: ಯಂತ್ರ ₹50,000. ವಾರ್ಷಿಕ ಸವಕಳಿ 10%. SLM ಪದ್ಧತಿಯಲ್ಲಿ 3 ವರ್ಷಗಳ ನಂತರ ಪುಸ್ತಕ ಮೌಲ್ಯ.', upload_btn:'📷 ಫೋಟೋ ಆಯ್ಕೆ', upload_ph:'ಫೋಟೋ ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ', img_note:'💡 ಹಲವು ಪ್ರಶ್ನೆಗಳಿದ್ದರೆ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ.', img_extra_ph:'ಐಚ್ಛಿಕ: ಯಾವ ಪ್ರಶ್ನೆ?', solve_btn:'ಪರಿಹರಿಸಿ', solution_label:'ಪರಿಹಾರ', copy_btn:'ನಕಲು', verify_label:'📖 ಪಠ್ಯಪುಸ್ತಕ ಉತ್ತರ ಪರಿಶೀಲಿಸಿ', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'ಪರಿಶೀಲಿಸಿ', history_title:'ಹಿಂದಿನ ಸಮಸ್ಯೆಗಳು', footer1:'BCom Math Helper — ಎಲ್ಲ BCom ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಉಚಿತ.', footer2:'AI ತಪ್ಪು ಮಾಡಬಹುದು. ಮುಖ್ಯ ಉತ್ತರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.', solving:'ಪರಿಹರಿಸಲಾಗುತ್ತಿದೆ...', retrying:'ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಲಾಗುತ್ತಿದೆ...', enter_problem:'ಮೊದಲು ಸಮಸ್ಯೆ ನಮೂದಿಸಿ.', upload_first:'ಮೊದಲು ಫೋಟೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ.', copied:'ನಕಲಿಸಲಾಗಿದೆ!', no_answer:'ಉತ್ತರ ಸಿಗಲಿಲ್ಲ.', conn_error:'❌ ಸಂಪರ್ಕ ದೋಷ.', enter_book_ans:'ಉತ್ತರ ನಮೂದಿಸಿ.', checking:'ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...', lang_name:'ಕನ್ನಡ' },
+    ml: { hero_eyebrow:'സൗജന്യം · ഘട്ടം ഘട്ടമായി · BCom വിദ്യാർത്ഥികൾക്ക്', hero_title:'BCom ഗണിതം എന്തും<br/><em>ഇവിടെ പരിഹരിക്കൂ</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — ഓരോ ഘട്ടവും കാണിച്ച് പൂർണ്ണ പരിഹാരം.', filter_label:'വിഷയം അനുസരിച്ച്', topic_all:'എല്ലാ വിഷയങ്ങളും', using_shared:'Shared quota', using_own:'നിങ്ങളുടെ key സജീവം', setup_title:'നിങ്ങളുടെ Gemini API Key ചേർക്കുക', setup_sub:'ദിവസം 1,500 അഭ്യർത്ഥനകൾ', setup_desc:'aistudio.google.com ൽ നിന്ന് സൗജന്യ key നേടുക.', save_btn:'സേവ് ചെയ്യുക', key_saved:'✓ Key സേവ് ആയി!', key_invalid:'✗ സാധുവായ key നൽകുക', solver_title:'പ്രശ്നം നൽകുക', solver_sub:'ടൈപ്പ് ചെയ്യുക അല്ലെങ്കിൽ ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക.', tab_text:'✏️ ടൈപ്പ്', tab_image:'📷 ഫോട്ടോ', problem_ph:'ഉദാഹരണം: ഒരു യന്ത്രത്തിന്റെ വില ₹50,000. വാർഷിക തേയ്മാനം 10%. SLM രീതിയിൽ 3 വർഷത്തിനു ശേഷമുള്ള ബുക്ക് മൂല്യം കണ്ടെത്തുക.', upload_btn:'📷 ഫോട്ടോ തിരഞ്ഞെടുക്കൂ', upload_ph:'ഫോട്ടോ ഇവിടെ കാണിക്കും', img_note:'💡 ഒന്നിലധികം ചോദ്യങ്ങളുണ്ടെങ്കിൽ നമ്പർ സൂചിപ്പിക്കൂ.', img_extra_ph:'ഐച്ഛികം: ഏത് ചോദ്യം?', solve_btn:'പരിഹരിക്കൂ', solution_label:'പരിഹാരം', copy_btn:'കോപ്പി', verify_label:'📖 പാഠപുസ്തക ഉത്തരം പരിശോധിക്കൂ', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'പരിശോധിക്കൂ', history_title:'മുൻ ചോദ്യങ്ങൾ', footer1:'BCom Math Helper — എല്ലാ BCom വിദ്യാർത്ഥികൾക്കും സൗജന്യം.', footer2:'AI തെറ്റ് ചെയ്തേക്കാം. പ്രധാനമായ ഉത്തരങ്ങൾ പരിശോധിക്കൂ.', solving:'പരിഹരിക്കുന്നു...', retrying:'വീണ്ടും ശ്രമിക്കുന്നു...', enter_problem:'ആദ്യം ചോദ്യം നൽകൂ.', upload_first:'ആദ്യം ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യൂ.', copied:'കോപ്പി ആയി!', no_answer:'ഉത്തരം കിട്ടിയില്ല.', conn_error:'❌ കണക്ഷൻ പ്രശ്നം.', enter_book_ans:'ഉത്തരം നൽകൂ.', checking:'പരിശോധിക്കുന്നു...', lang_name:'മലയാളം' },
+    gu: { hero_eyebrow:'મફત · પગલું-દ-પગલું · BCom વિદ્યાર્થીઓ માટે', hero_title:'BCom ગણિત ગમે તે<br/><em>અહીં ઉકેલો</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — દરેક પગલા સાથે સંપૂર્ણ ઉકેલ.', filter_label:'વિષય અનુસાર', topic_all:'બધા વિષયો', using_shared:'Shared quota', using_own:'તમારી key સક્રિય', setup_title:'તમારી Gemini API Key ઉમેરો', setup_sub:'રોજ 1,500 વિનંતીઓ', setup_desc:'aistudio.google.com પરથી મફત key મેળવો.', save_btn:'સાચવો', key_saved:'✓ Key સાચવાઈ!', key_invalid:'✗ માન્ય key આપો', solver_title:'સમસ્યા દાખલ કરો', solver_sub:'ટાઇપ કરો અથવા ફોટો અપલોડ કરો.', tab_text:'✏️ ટાઇપ', tab_image:'📷 ફોટો', problem_ph:'ઉદાહરણ: એક મશીનની કિંમત ₹50,000. વાર્ષિક ઘસારો 10%. SLM પદ્ધતિ મુજબ 3 વર્ષ પછી પુસ્તક મૂલ્ય.', upload_btn:'📷 ફોટો પસંદ કરો', upload_ph:'ફોટો અહીં દેખાશે', img_note:'💡 ઘણા પ્રશ્નો હોય તો નંબર ઉલ્લેખ કરો.', img_extra_ph:'વૈકલ્પિક: ક્યો પ્રશ્ન?', solve_btn:'ઉકેલો', solution_label:'ઉકેલ', copy_btn:'નકલ', verify_label:'📖 પાઠ્યપુસ્તક જવાબ ચકાસો', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'ચકાસો', history_title:'અગાઉના પ્રશ્નો', footer1:'BCom Math Helper — બધા BCom વિદ્યાર્થીઓ માટે મફત.', footer2:'AI ભૂલ કરી શકે. મહત્વના જવાબ ચકાસો.', solving:'ઉકેલ કરી રહ્યા...', retrying:'ફરી પ્રયાસ...', enter_problem:'પ્રથમ સમસ્યા દાખલ કરો.', upload_first:'પ્રથમ ફોટો અપલોડ કરો.', copied:'નકલ થઈ!', no_answer:'જવાબ મળ્યો નહીં.', conn_error:'❌ જોડાણ ભૂલ.', enter_book_ans:'જવાબ દાખલ કરો.', checking:'ચકાસી રહ્યા...', lang_name:'ગુજરાતી' },
+    mr: { hero_eyebrow:'मोफत · पायरी-दर-पायरी · BCom विद्यार्थ्यांसाठी', hero_title:'BCom गणित कोणतेही<br/><em>येथे सोडवा</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — प्रत्येक पायरीसह संपूर्ण उपाय.', filter_label:'विषयानुसार', topic_all:'सर्व विषय', using_shared:'Shared quota', using_own:'तुमची key सक्रिय', setup_title:'तुमची Gemini API Key जोडा', setup_sub:'दररोज 1,500 विनंत्या', setup_desc:'aistudio.google.com वरून मोफत key मिळवा.', save_btn:'जतन करा', key_saved:'✓ Key जतन झाली!', key_invalid:'✗ वैध key द्या', solver_title:'समस्या प्रविष्ट करा', solver_sub:'टाइप करा किंवा फोटो अपलोड करा.', tab_text:'✏️ टाइप', tab_image:'📷 फोटो', problem_ph:'उदाहरण: एका मशीनची किंमत ₹50,000. वार्षिक घसारा 10%. SLM पद्धतीने 3 वर्षांनंतर पुस्तक मूल्य काढा.', upload_btn:'📷 फोटो निवडा', upload_ph:'फोटो येथे दिसेल', img_note:'💡 अनेक प्रश्न असल्यास क्रमांक सांगा.', img_extra_ph:'पर्यायी: कोणता प्रश्न?', solve_btn:'सोडवा', solution_label:'उपाय', copy_btn:'कॉपी', verify_label:'📖 पाठ्यपुस्तक उत्तर तपासा', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'तपासा', history_title:'मागील प्रश्न', footer1:'BCom Math Helper — सर्व BCom विद्यार्थ्यांसाठी मोफत.', footer2:'AI चुका करू शकतो. महत्त्वाची उत्तरे तपासा.', solving:'सोडवत आहे...', retrying:'पुन्हा प्रयत्न...', enter_problem:'प्रथम समस्या प्रविष्ट करा.', upload_first:'प्रथम फोटो अपलोड करा.', copied:'कॉपी झाले!', no_answer:'उत्तर मिळाले नाही.', conn_error:'❌ कनेक्शन त्रुटी.', enter_book_ans:'उत्तर प्रविष्ट करा.', checking:'तपासत आहे...', lang_name:'मराठी' },
+    pa: { hero_eyebrow:'ਮੁਫ਼ਤ · ਕਦਮ-ਦਰ-ਕਦਮ · BCom ਵਿਦਿਆਰਥੀਆਂ ਲਈ', hero_title:'BCom ਗਣਿਤ ਕੋਈ ਵੀ<br/><em>ਇੱਥੇ ਹੱਲ ਕਰੋ</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — ਹਰ ਕਦਮ ਨਾਲ ਪੂਰਾ ਹੱਲ.', filter_label:'ਵਿਸ਼ੇ ਅਨੁਸਾਰ', topic_all:'ਸਾਰੇ ਵਿਸ਼ੇ', using_shared:'Shared quota', using_own:'ਤੁਹਾਡੀ key ਸਰਗਰਮ', setup_title:'ਆਪਣੀ Gemini API Key ਜੋੜੋ', setup_sub:'ਰੋਜ਼ 1,500 ਬੇਨਤੀਆਂ', setup_desc:'aistudio.google.com ਤੋਂ ਮੁਫ਼ਤ key ਲਓ.', save_btn:'ਸੁਰੱਖਿਅਤ ਕਰੋ', key_saved:'✓ Key ਸੁਰੱਖਿਅਤ!', key_invalid:'✗ ਸਹੀ key ਦਿਓ', solver_title:'ਸਵਾਲ ਦਰਜ ਕਰੋ', solver_sub:'ਟਾਈਪ ਕਰੋ ਜਾਂ ਫੋਟੋ ਅੱਪਲੋਡ ਕਰੋ.', tab_text:'✏️ ਟਾਈਪ', tab_image:'📷 ਫੋਟੋ', problem_ph:'ਉਦਾਹਰਣ: ਮਸ਼ੀਨ ₹50,000. ਸਾਲਾਨਾ ਘਿਸਾਵਟ 10%. SLM ਅਨੁਸਾਰ 3 ਸਾਲ ਬਾਅਦ ਕਿਤਾਬੀ ਮੁੱਲ.', upload_btn:'📷 ਫੋਟੋ ਚੁਣੋ', upload_ph:'ਫੋਟੋ ਇੱਥੇ ਦਿਖੇਗੀ', img_note:'💡 ਕਈ ਸਵਾਲ ਹੋਣ ਤਾਂ ਨੰਬਰ ਦੱਸੋ.', img_extra_ph:'ਵਿਕਲਪਿਕ: ਕਿਹੜਾ ਸਵਾਲ?', solve_btn:'ਹੱਲ ਕਰੋ', solution_label:'ਹੱਲ', copy_btn:'ਕਾਪੀ', verify_label:'📖 ਕਿਤਾਬ ਦਾ ਜਵਾਬ ਜਾਂਚੋ', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'ਜਾਂਚੋ', history_title:'ਪਿਛਲੇ ਸਵਾਲ', footer1:'BCom Math Helper — ਸਾਰੇ BCom ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਮੁਫ਼ਤ.', footer2:'AI ਗਲਤੀ ਕਰ ਸਕਦਾ ਹੈ. ਜ਼ਰੂਰੀ ਜਵਾਬ ਜਾਂਚੋ.', solving:'ਹੱਲ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...', retrying:'ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼...', enter_problem:'ਪਹਿਲਾਂ ਸਵਾਲ ਦਰਜ ਕਰੋ.', upload_first:'ਪਹਿਲਾਂ ਫੋਟੋ ਅੱਪਲੋਡ ਕਰੋ.', copied:'ਕਾਪੀ ਹੋ ਗਈ!', no_answer:'ਜਵਾਬ ਨਹੀਂ ਮਿਲਿਆ.', conn_error:'❌ ਕੁਨੈਕਸ਼ਨ ਗੜਬੜ.', enter_book_ans:'ਜਵਾਬ ਦਰਜ ਕਰੋ.', checking:'ਜਾਂਚੀ ਜਾ ਰਹੀ ਹੈ...', lang_name:'ਪੰਜਾਬੀ' },
+    ur: { hero_eyebrow:'مفت · مرحلہ بمرحلہ · BCom طلباء کے لیے', hero_title:'BCom ریاضی کا کوئی بھی مسئلہ<br/><em>یہاں حل کریں</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — ہر قدم کے ساتھ مکمل حل.', filter_label:'مضمون کے مطابق', topic_all:'تمام مضامین', using_shared:'مشترکہ quota', using_own:'آپ کی key فعال', setup_title:'اپنی Gemini API Key شامل کریں', setup_sub:'یومیہ 1,500 درخواستیں', setup_desc:'aistudio.google.com سے مفت key حاصل کریں.', save_btn:'محفوظ کریں', key_saved:'✓ Key محفوظ!', key_invalid:'✗ درست key دیں', solver_title:'مسئلہ درج کریں', solver_sub:'ٹائپ کریں یا تصویر اپلوڈ کریں.', tab_text:'✏️ ٹائپ', tab_image:'📷 تصویر', problem_ph:'مثال: مشین ₹50,000۔ سالانہ گھساوٹ 10%۔ SLM طریقے سے 3 سال بعد کتابی قدر۔', upload_btn:'📷 تصویر منتخب کریں', upload_ph:'تصویر یہاں دکھائی دے گی', img_note:'💡 متعدد سوالات ہوں تو نمبر بتائیں۔', img_extra_ph:'اختیاری: کون سا سوال؟', solve_btn:'حل کریں', solution_label:'حل', copy_btn:'کاپی', verify_label:'📖 کتابی جواب جانچیں', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'جانچیں', history_title:'پچھلے سوالات', footer1:'BCom Math Helper — تمام BCom طلباء کے لیے مفت۔', footer2:'AI غلطی کر سکتا ہے۔ اہم جوابات جانچیں۔', solving:'حل ہو رہا ہے...', retrying:'دوبارہ کوشش...', enter_problem:'پہلے مسئلہ درج کریں۔', upload_first:'پہلے تصویر اپلوڈ کریں۔', copied:'کاپی ہو گئی!', no_answer:'جواب نہیں ملا۔', conn_error:'❌ کنکشن خرابی۔', enter_book_ans:'جواب درج کریں۔', checking:'جانچا جا رہا ہے...', lang_name:'اردو' },
+    ne: { hero_eyebrow:'नि:शुल्क · चरण-दर-चरण · BCom विद्यार्थीहरूका लागि', hero_title:'BCom गणितको जुनसुकै समस्या<br/><em>यहाँ समाधान गर्नुहोस्</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — हरेक चरणसहित पूर्ण समाधान.', filter_label:'विषय अनुसार', topic_all:'सबै विषयहरू', using_shared:'Shared quota', using_own:'तपाईंको key सक्रिय', setup_title:'आफ्नै Gemini API Key थप्नुहोस्', setup_sub:'दैनिक 1,500 अनुरोधहरू', setup_desc:'aistudio.google.com बाट नि:शुल्क key लिनुहोस्।', save_btn:'बचत गर्नुहोस्', key_saved:'✓ Key बचत भयो!', key_invalid:'✗ मान्य key दिनुहोस्', solver_title:'समस्या प्रविष्ट गर्नुहोस्', solver_sub:'टाइप गर्नुहोस् वा फोटो अपलोड गर्नुहोस्।', tab_text:'✏️ टाइप', tab_image:'📷 फोटो', problem_ph:'उदाहरण: मेशिन ₹50,000। वार्षिक ह्रास 10%। SLM विधिले 3 वर्षपछि पुस्तक मूल्य।', upload_btn:'📷 फोटो रोज्नुहोस्', upload_ph:'फोटो यहाँ देखिनेछ', img_note:'💡 धेरै प्रश्नहरू भएमा नम्बर उल्लेख गर्नुहोस्।', img_extra_ph:'वैकल्पिक: कुन प्रश्न?', solve_btn:'समाधान गर्नुहोस्', solution_label:'समाधान', copy_btn:'प्रतिलिपि', verify_label:'📖 पाठ्यपुस्तक उत्तर जाँच गर्नुहोस्', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'जाँच गर्नुहोस्', history_title:'पछिल्ला प्रश्नहरू', footer1:'BCom Math Helper — सबै BCom विद्यार्थीहरूका लागि नि:शुल्क।', footer2:'AI गल्ती गर्न सक्छ। महत्वपूर्ण उत्तरहरू जाँच गर्नुहोस्।', solving:'समाधान गरिँदैछ...', retrying:'पुनः प्रयास...', enter_problem:'पहिले समस्या प्रविष्ट गर्नुहोस्।', upload_first:'पहिले फोटो अपलोड गर्नुहोस्।', copied:'प्रतिलिपि भयो!', no_answer:'उत्तर फेला परेन।', conn_error:'❌ जडान त्रुटि।', enter_book_ans:'उत्तर प्रविष्ट गर्नुहोस्।', checking:'जाँच गरिँदैछ...', lang_name:'नेपाली' },
+    mai: { hero_eyebrow:'नि:शुल्क · चरण-दर-चरण · BCom छात्रक लेल', hero_title:'BCom गणितक कोनो समस्या<br/><em>एतय हल करू</em>', hero_sub:'Accounting, Statistics, Finance, Partnership — हर चरणक संग पूर्ण समाधान.', filter_label:'विषय अनुसार', topic_all:'सब विषय', using_shared:'Shared quota', using_own:'अपनेक key सक्रिय', setup_title:'अपन Gemini API Key जोड़ू', setup_sub:'प्रतिदिन 1,500 अनुरोध', setup_desc:'aistudio.google.com सँ मुफ्त key लिअ।', save_btn:'सुरक्षित करू', key_saved:'✓ Key सुरक्षित!', key_invalid:'✗ वैध key दिअ', solver_title:'समस्या दर्ज करू', solver_sub:'टाइप करू वा फोटो अपलोड करू।', tab_text:'✏️ टाइप', tab_image:'📷 फोटो', problem_ph:'उदाहरण: मशीन ₹50,000। वार्षिक ह्रास 10%। SLM विधि सँ 3 साल बाद पुस्तक मूल्य।', upload_btn:'📷 फोटो चुनू', upload_ph:'फोटो एतय देखाएत', img_note:'💡 एकाधिक प्रश्न होय तँ नम्बर बताउ।', img_extra_ph:'वैकल्पिक: कोन प्रश्न?', solve_btn:'हल करू', solution_label:'समाधान', copy_btn:'कॉपी', verify_label:'📖 पुस्तकक उत्तर जाँचू', verify_ph:'Answer A = 35\nAnswer B = 42', verify_btn:'जाँचू', history_title:'पछिला प्रश्न', footer1:'BCom Math Helper — सब BCom छात्रक लेल मुफ्त।', footer2:'AI गलती कऽ सकैत अछि। जरूरी उत्तर जाँचू।', solving:'हल भऽ रहल अछि...', retrying:'फेर प्रयास...', enter_problem:'पहिने समस्या दर्ज करू।', upload_first:'पहिने फोटो अपलोड करू।', copied:'कॉपी भेल!', no_answer:'उत्तर नहि भेटल।', conn_error:'❌ जोड़ण त्रुटि।', enter_book_ans:'उत्तर दर्ज करू।', checking:'जाँच भऽ रहल अछि...', lang_name:'मैथिली' }
   };
 
+  const EXAMPLES = [
+    'Principal ₹8,000, annual interest rate 6%, time 3 years. Find Simple Interest and Total Amount.',
+    'A machine costs ₹50,000. Annual depreciation rate 10%. Find book value after 3 years using Straight Line Method.',
+    'Find Mean, Median and Mode: 12, 15, 18, 20, 22, 25, 25, 30.',
+    'Rahul started business. Bought furniture for ₹15,000 cash. Pass the Journal Entry.',
+    'A and B share profits equally. Annual profit ₹60,000. A\'s salary ₹12,000. Distribute the profit.'
+  ];
+
   let currentLang = localStorage.getItem('site_lang') || 'en';
-
-  function applyTranslations() {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translations[currentLang][key]) {
-        el.innerHTML = translations[currentLang][key];
-      }
-    });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-      const key = el.getAttribute('data-i18n-placeholder');
-      if (translations[currentLang][key]) {
-        el.placeholder = translations[currentLang][key];
-      }
-    });
-    document.body.className = currentLang === 'bn' ? 'lang-bn' : '';
-    document.getElementById('lang-select').value = currentLang;
-  }
-
-  function changeLang(lang) {
-    currentLang = lang;
-    localStorage.setItem('site_lang', lang);
-    applyTranslations();
-  }
-
-  function t(key) {
-    return translations[currentLang][key] || key;
-  }
-
-  // ════════════════════════════════════════════
-  // STATE
-  // ════════════════════════════════════════════
   let apiKey = localStorage.getItem('gemini_key') || '';
   let selectedTopic = '';
   let history = JSON.parse(localStorage.getItem('math_history') || '[]');
@@ -946,60 +820,47 @@
   let activeTab = 'text';
   let lastSolutionText = '';
 
-  const EXAMPLES = [
-    'Principal is ₹8000, annual interest rate 6%, time 3 years. Find the simple interest and total amount.',
-    'Cost of a machine is ₹50,000. Annual depreciation rate is 10%. Find the book value after 3 years using the Straight Line Method.',
-    'Find the Mean, Median and Mode from the following data: 12, 15, 18, 20, 22, 25, 25, 30.',
-    'Rahul started a business. He bought furniture for ₹15,000 in cash. Pass the Journal Entry.',
-    'A and B are partners sharing profits equally. Annual profit is ₹60,000. A\'s salary is ₹12,000. Distribute the profit.'
-  ];
+  function t(k) { return (T[currentLang] && T[currentLang][k]) || (T.en[k] || k); }
 
-  // ── INIT ──
-  function updateKeyBadge() {
-    const badge = document.getElementById('key-using-badge');
-    if (apiKey) {
-      badge.className = 'using-indicator own';
-      badge.textContent = t('using_own');
-    } else {
-      badge.className = 'using-indicator shared';
-      badge.textContent = t('using_shared');
-    }
-  }
-
-  if (apiKey) {
-    document.getElementById('api-key-input').value = apiKey;
-    document.getElementById('key-status').className = 'key-status ok';
-  }
-
-  applyTranslations();
-  updateKeyBadge();
-  renderHistory();
-
-  // ── SETUP TOGGLE ──
-  function toggleSetup() {
-    const body = document.getElementById('setup-body');
-    const chevron = document.getElementById('setup-chevron');
-    body.classList.toggle('open');
-    chevron.classList.toggle('open');
-  }
-
-  // ── KEY MANAGEMENT ──
-  function saveKey() {
-    const val = document.getElementById('api-key-input').value.trim();
-    const st = document.getElementById('key-status');
-    if (val.length < 20) {
-      st.className = 'key-status err';
-      st.textContent = t('key_invalid');
-      return;
-    }
-    apiKey = val;
-    localStorage.setItem('gemini_key', apiKey);
-    st.className = 'key-status ok';
-    st.textContent = t('key_saved');
+  function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      el.innerHTML = t(k);
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      el.placeholder = t(el.getAttribute('data-i18n-ph'));
+    });
+    document.getElementById('lang-select').value = currentLang;
     updateKeyBadge();
   }
 
-  // ── TOPIC SELECT ──
+  function changeLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('site_lang', lang);
+    applyTranslations();
+  }
+
+  function updateKeyBadge() {
+    const b = document.getElementById('key-using-badge');
+    if (apiKey) { b.className = 'using-badge own'; b.textContent = t('using_own'); }
+    else { b.className = 'using-badge shared'; b.textContent = t('using_shared'); }
+  }
+
+  function toggleSetup() {
+    document.getElementById('setup-body').classList.toggle('open');
+    document.getElementById('setup-chevron').classList.toggle('open');
+  }
+
+  function saveKey() {
+    const val = document.getElementById('api-key-input').value.trim();
+    const st = document.getElementById('key-status');
+    if (val.length < 15) { st.className = 'key-status err'; st.textContent = t('key_invalid'); return; }
+    apiKey = val;
+    localStorage.setItem('gemini_key', apiKey);
+    st.className = 'key-status ok'; st.textContent = t('key_saved');
+    updateKeyBadge();
+  }
+
   function setTopic(el, topic) {
     document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
@@ -1011,125 +872,103 @@
     document.getElementById('problem-input').focus();
   }
 
-  // ── TAB SWITCH ──
-  function switchTab(tab) {
+  function switchTab(tab, btn) {
     activeTab = tab;
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    event.target.classList.add('active');
+    btn.classList.add('active');
     document.getElementById('tab-text').style.display = tab === 'text' ? 'block' : 'none';
     document.getElementById('tab-image').style.display = tab === 'image' ? 'block' : 'none';
   }
 
-  // ── IMAGE HANDLING ──
   function handleImage(e) {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = function(ev) {
-      const result = ev.target.result;
+    reader.onload = ev => {
       uploadedImageMime = file.type;
-      uploadedImageBase64 = result.split(',')[1];
-      document.getElementById('img-preview').src = result;
+      uploadedImageBase64 = ev.target.result.split(',')[1];
+      document.getElementById('img-preview').src = ev.target.result;
       document.getElementById('img-preview-wrap').style.display = 'block';
       document.getElementById('img-note').style.display = 'block';
-      document.getElementById('upload-area').style.display = 'none';
+      document.getElementById('upload-placeholder').style.display = 'none';
     };
     reader.readAsDataURL(file);
   }
 
   function removeImage() {
-    uploadedImageBase64 = null;
-    uploadedImageMime = null;
+    uploadedImageBase64 = null; uploadedImageMime = null;
     document.getElementById('img-preview-wrap').style.display = 'none';
     document.getElementById('img-note').style.display = 'none';
-    document.getElementById('upload-area').style.display = 'block';
+    document.getElementById('upload-placeholder').style.display = 'block';
     document.getElementById('img-input').value = '';
     document.getElementById('img-extra').value = '';
   }
 
-  // ── BUILD SYSTEM PROMPT ──
-  function buildSystemPrompt() {
-    return `You are an expert BCom (Bachelor of Commerce) mathematics teacher helping students of BCom Honours and Pass courses in West Bengal, India.
+  function buildPrompt() {
+    const langNote = currentLang === 'en'
+      ? 'Respond in English.'
+      : `Respond in ${t('lang_name')} for all explanations outside tables. Keep all accounting/table terms (Particulars, Debit, Credit, Amount, etc.) in English inside tables.`;
 
-STRICT RULES — must be followed:
-1. Never just read or repeat the question and stop — you must perform the complete numerical calculation and arrive at the actual answer.
-2. Show real numbers plugged into every step — don't just describe the method.
-3. If the image/question contains a table or multiple data points, use every number and complete the full calculation.
+    return `You are an expert BCom (Bachelor of Commerce) mathematics teacher for BCom Honours and Pass students in India.
+
+STRICT RULES:
+1. Never just repeat the question — perform the complete numerical calculation and give the actual answer.
+2. Show real numbers plugged into every step.
+3. Use every number from the data provided and complete the full calculation.
 4. Always end with a clear final numerical answer.
-5. Never write an instruction-like sentence such as "calculate this" and stop — you must complete the calculation yourself.
-6. For Accounting problems (Journal, Ledger, Trial Balance, Balance Sheet, Trading/P&L Account, Machine Hour Rate, Cost Sheet, etc.), present it exactly as it would be written in an exam notebook — using markdown tables with columns like Particulars, Debit, Credit, Amount, Basis of Apportionment, etc. Show each account/statement in its own table, like a real ledger/statement.
-7. Use correct markdown table syntax (| Column | Column |) so it renders properly.
-8. Very important — all text INSIDE tables/ledgers/statements (column headers like Particulars, Amount, Debit, Credit, Basis of Apportionment; and row items like Direct Wages, Depreciation, Indirect Wages, Net Profit, etc.) must be in ENGLISH, exactly as written in a real commerce exam notebook. Only the explanatory text outside tables should be in the response language.
-9. Never cut the answer short due to length concerns. No matter how large the problem is, or how many items/machines/accounts are involved, do not stop until the entire calculation — every row, every step — is fully complete.
-10. Respond in this language: ${currentLang === 'bn' ? 'Bengali (বাংলা) for explanations, but keep all accounting/table terms in English as instructed above' : 'English'}.
+5. Never write "calculate this" and stop — complete the calculation yourself.
+6. For Accounting problems (Journal, Ledger, Trial Balance, Balance Sheet, P&L, Machine Hour Rate, Cost Sheet, etc.) use markdown tables with proper columns (Particulars, Debit, Credit, Amount, etc.) exactly as written in an exam notebook.
+7. Use correct markdown table syntax (| Col | Col |) so it renders properly.
+8. All text INSIDE tables must be in ENGLISH (column headers and row items like Direct Wages, Depreciation, Net Profit, etc.) regardless of response language.
+9. Never cut the answer short. Complete every row and every step no matter how large the problem.
+10. ${langNote}
 
-Solution format:
-✦ Given Information (all numbers clearly)
+Format:
+✦ Given Information
 ✦ Formula (if applicable)
-✦ Complete step-by-step calculation (with real numbers, in table/ledger format for Accounting)
-✦ Final Answer (clearly bolded)`;
+✦ Complete step-by-step calculation (with real numbers; use tables for Accounting)
+✦ **Final Answer** (bolded)`;
   }
 
-  // ── SOLVE PROBLEM (via backend) ──
   async function solveProblem() {
     const isImage = activeTab === 'image';
-
-    if (isImage && !uploadedImageBase64) {
-      alert(t('upload_first'));
-      return;
-    }
-
+    if (isImage && !uploadedImageBase64) { alert(t('upload_first')); return; }
     const textProblem = document.getElementById('problem-input').value.trim();
-    if (!isImage && !textProblem) {
-      alert(t('enter_problem'));
-      return;
-    }
+    if (!isImage && !textProblem) { alert(t('enter_problem')); return; }
 
     const btn = document.getElementById('solve-btn');
     btn.disabled = true;
-
     const ansSection = document.getElementById('answer-section');
     const ansBody = document.getElementById('answer-body');
-
     ansSection.style.display = 'block';
     ansBody.innerHTML = `<div class="loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>${t('solving')}</span></div>`;
     ansSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
+    const systemPrompt = buildPrompt();
     const topicLine = selectedTopic ? `Topic: ${selectedTopic}\n\n` : '';
-    const systemPrompt = buildSystemPrompt();
-
     let parts = [];
 
     if (isImage) {
-      const extraNote = document.getElementById('img-extra').value.trim();
-      const imgPrompt = `${systemPrompt}\n\n${topicLine}Solve the BCom math problem shown in the image.${extraNote ? '\n\nOnly solve this specific question: ' + extraNote : ' Solve all questions shown.'}`;
+      const extra = document.getElementById('img-extra').value.trim();
       parts = [
         { inline_data: { mime_type: uploadedImageMime, data: uploadedImageBase64 } },
-        { text: imgPrompt }
+        { text: `${systemPrompt}\n\n${topicLine}Solve the BCom math problem in this image.${extra ? '\n\nSolve only: ' + extra : ' Solve all questions shown.'}` }
       ];
     } else {
-      const prompt = `${systemPrompt}\n\n${topicLine}Problem:\n${textProblem}`;
-      parts = [{ text: prompt }];
+      parts = [{ text: `${systemPrompt}\n\n${topicLine}Problem:\n${textProblem}` }];
     }
 
     try {
       const res = await fetch(BACKEND_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          parts,
-          userApiKey: apiKey || null,
-          topic: selectedTopic || null,
-          isImage
-        })
+        body: JSON.stringify({ parts, userApiKey: apiKey || null, topic: selectedTopic || null, isImage })
       });
-
       const data = await res.json();
 
       if (data.error) {
         ansBody.innerHTML = `<span style="color:var(--danger)">❌ ${data.error}</span>`;
-        btn.disabled = false;
-        return;
+        btn.disabled = false; return;
       }
 
       const text = data.text || t('no_answer');
@@ -1139,26 +978,20 @@ Solution format:
       document.getElementById('verify-result').style.display = 'none';
       document.getElementById('verify-input').value = '';
 
-      const histQ = isImage ? '[Image problem]' : textProblem;
+      const histQ = isImage ? '[Photo problem]' : textProblem;
       history.unshift({ q: histQ, time: new Date().toLocaleString() });
       if (history.length > 10) history.pop();
       localStorage.setItem('math_history', JSON.stringify(history));
       renderHistory();
-
-    } catch (e) {
+    } catch(e) {
       ansBody.innerHTML = `<span style="color:var(--danger)">${t('conn_error')}</span>`;
     }
-
     btn.disabled = false;
   }
 
-  // ── VERIFY ANSWER ──
   async function verifyAnswer() {
     const bookAnswer = document.getElementById('verify-input').value.trim();
-    if (!bookAnswer) {
-      alert(t('enter_book_answer'));
-      return;
-    }
+    if (!bookAnswer) { alert(t('enter_book_ans')); return; }
 
     const vBtn = document.getElementById('verify-btn');
     const vResult = document.getElementById('verify-result');
@@ -1166,59 +999,45 @@ Solution format:
     vResult.style.display = 'block';
     vResult.innerHTML = `<div class="loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>${t('checking')}</span></div>`;
 
-    const verifyPrompt = `You previously gave this BCom solution:
+    const langNote = currentLang === 'en' ? 'Respond in English.' : `Respond in ${t('lang_name')}, but keep all accounting/table terms in English.`;
 
+    const verifyPrompt = `You previously gave this BCom solution:
 ${lastSolutionText}
 
-The student says the textbook's actual answer(s) are:
+The student says the textbook answer(s) are:
 ${bookAnswer}
 
-(There may be multiple parts here — like rates for multiple machines, or separate answers for parts a/b/c. Check each one separately.)
+(There may be multiple parts — e.g. rates for multiple machines or parts a/b/c. Check each separately.)
 
-Now:
-1. Verify whether each final answer in your previous solution matches the corresponding textbook answer, one by one.
-2. If everything matches, briefly say "✅ All answers are correct and match the textbook."
-3. If any part doesn't match: a) Clearly state which part was wrong. b) Redo the entire solution step-by-step again, trying to reach the textbook answer, and show exactly where the error was. c) If after multiple attempts you cannot reach the textbook answer and your calculation seems correct, clearly state "⚠️ The textbook answer may be incorrect for this part, because..." and explain why. Do not falsely force a match with the textbook answer.
-4. When giving the full solution again, maintain table/ledger format, don't leave any part incomplete.
-
-Respond in ${currentLang === 'bn' ? 'Bengali, but keep all accounting/table terms in English' : 'English'}, using markdown table/ledger format nicely.`;
+Tasks:
+1. Verify each final answer against the corresponding textbook answer, one by one.
+2. If all match: "✅ All answers correct, matches the textbook."
+3. If any don't match: a) State which part was wrong. b) Redo the full solution step-by-step trying to reach the textbook answer, showing where the error was. c) If you cannot reach the textbook answer after careful recalculation and your math seems correct, state "⚠️ The textbook answer may be incorrect for this part, because..." — do NOT force a match.
+4. Maintain table/ledger format, do not leave any part incomplete.
+${langNote}`;
 
     try {
       const res = await fetch(BACKEND_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          parts: [{ text: verifyPrompt }],
-          userApiKey: apiKey || null,
-          topic: selectedTopic || null,
-          isImage: false
-        })
+        body: JSON.stringify({ parts: [{ text: verifyPrompt }], userApiKey: apiKey || null })
       });
       const data = await res.json();
-
-      if (data.error) {
-        vResult.innerHTML = `<span style="color:var(--danger)">❌ ${data.error}</span>`;
-      } else {
-        const text = data.text || t('no_answer');
-        lastSolutionText = text;
-        vResult.innerHTML = marked.parse(text);
-      }
-    } catch (e) {
+      const text = data.error ? `❌ ${data.error}` : (data.text || t('no_answer'));
+      lastSolutionText = data.text || lastSolutionText;
+      vResult.innerHTML = marked.parse(text);
+    } catch(e) {
       vResult.innerHTML = `<span style="color:var(--danger)">${t('conn_error')}</span>`;
     }
-
     vBtn.disabled = false;
   }
 
-  // ── COPY / HISTORY ──
   function copyAnswer() {
-    navigator.clipboard.writeText(lastSolutionText).then(() => {
-      alert(t('copied'));
-    });
+    navigator.clipboard.writeText(lastSolutionText).then(() => alert(t('copied')));
   }
 
   function renderHistory() {
-    if (history.length === 0) return;
+    if (!history.length) return;
     const sec = document.getElementById('history-section');
     const list = document.getElementById('history-list');
     sec.style.display = 'block';
@@ -1226,14 +1045,18 @@ Respond in ${currentLang === 'bn' ? 'Bengali, but keep all accounting/table term
       <div class="history-item" onclick="loadHistory(${i})">
         <div class="history-q">${h.q}</div>
         <div class="history-meta">${h.time}</div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
 
   function loadHistory(i) {
     document.getElementById('problem-input').value = history[i].q;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  // Init
+  if (apiKey) document.getElementById('api-key-input').value = apiKey;
+  applyTranslations();
+  renderHistory();
 </script>
 </body>
 </html>
